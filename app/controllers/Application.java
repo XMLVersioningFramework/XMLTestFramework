@@ -22,22 +22,23 @@ public class Application extends Controller {
 	public static Result index() {
 		//JsonNode json = request().body().asJson();
 		//ObjectNode result = Json.newObject();
-    	List<UserStory> userStories = UserStoryHandler.loadAllUserStories();
+    	//List<UserStory> userStories = UserStoryHandler.loadAllUserStories();
     	//for (UserStory userStory : userStorys) {
     //		System.out.println(userStory);
 	//	}
-    	return ok(Json.toJson(userStories));
+    	return ok(views.html.index.render("Hello my framwork"));
     	//List<Task> tasks = Task.find.all();
      // 	return ok(views.html.index.render("Hello my framwork"));
 
     }
     public static Result getUserstories() {
-    	List<Task> tasks = Task.find.all();
-        return ok(views.html.index.render("Hello my framwork"+tasks.get(0).name));
+    	List<UserStory> userStories = UserStoryHandler.loadAllUserStories();
+    	return ok(Json.toJson(userStories));
     }
-    public static Result getTests(String userStoryName) {
-    	List<Task> tasks = Task.find.all();
-        return ok(views.html.index.render("Hello my framwork"+tasks.get(0).name));
+    public static Result getAUserstory(String userStoryName) {
+    	//List<Task> tasks = Task.find.all();
+    	UserStory userStory = UserStoryHandler.getUserStoryInfo(userStoryName);
+    	return ok(Json.toJson(userStory));
     }
         
     

@@ -17,6 +17,13 @@ static String baseUrl="../userStories/";
 	public static List<UserStory> loadAllUserStories(){
 	
 		final File folder = new File(baseUrl);
+		
+		
+		if(folder.listFiles().length==0){
+			System.out.println("the folder whas emty");
+			return null;
+		}
+		
 		for (final File fileEntry : folder.listFiles()) {
 			//System.out.println("check file: "+fileEntry.getName());
 			if (fileEntry.isDirectory()) {
@@ -25,23 +32,31 @@ static String baseUrl="../userStories/";
 					//System.out.println("fileEntry2 is file compare: "+fileEntry2.getName());
 					if(fileEntry2.getName().equals("userSenario.html")){
 					//	System.out.println("existing user senarios:" + fileEntry.getName());
-						userStories.add(new UserStory(getTotalFile(fileEntry2),new ArrayList<Test>()));
+						userStories.add(new UserStory(fileEntry.getName(),getTotalFile(fileEntry2)));
 					}
 				}
 	        }
 		}
 		return userStories;
 	}
-	public void getUserStoryInfo(String url){
+	public static UserStory getUserStoryInfo(String url){
 		String Userstory=getTotalFile(new File(baseUrl+url+"userStory.html"));
 		
+		UserStory userStory=new UserStory(url, Userstory);
+		
 		final File folder = new File(baseUrl+url);
+		
+		if(folder.listFiles().length==0){
+			System.out.println("the folder whas emty");
+			return null;
+		}
 		
 		for (final File fileEntry : folder.listFiles()) {//looping the folder
 			if (fileEntry.isDirectory()) {//tests
 				System.out.println("ett test: "+fileEntry.getName());
 				
 				Test test=new Test(fileEntry.getName());
+				userStory.addTests(test);
 				test.setRunFile(getTotalFile(new File(baseUrl+url+fileEntry.getName()+"/run.js")));
 				File input=new File(baseUrl+url+fileEntry.getName()+"/input");
 				for (final File inputFile : input.listFiles()) {//looping the folder
@@ -55,7 +70,7 @@ static String baseUrl="../userStories/";
 			}
 			
 		}
-		
+		return userStory;
 	}
 	
 	static String getTotalFile(File f){
@@ -64,22 +79,16 @@ static String baseUrl="../userStories/";
 		BufferedReader br;
 		try {
 			br = new BufferedReader(new FileReader(f));
-		
- 
 			while ((sCurrentLine = br.readLine()) != null) {
 				totFile+=sCurrentLine;
 			}
-		
 			return totFile;
 			//userStorys.add(new UserStory(totFile));
 		} catch ( IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return totFile;
-		 
+		return totFile;	 
 	}
-	
-	
 	
 }

@@ -7,15 +7,20 @@ import play.libs.Json;
 
 public class UserStory {
 	String html="";
+	String name="";
 	List<Test> tests = new ArrayList<Test>();
-	public UserStory(String tHtml,List<Test> tTests) {
+	public UserStory(String tName,String tHtml) {
 		html=tHtml;
-		tests=tTests;
-		//System.out.println("file"+ s);
-		// TODO Auto-generated constructor stub
+		name=tName;
+	}
+	public void addTests(Test test){
+		tests.add(test);
 	}
 	public String getHtml(){
 		return html;
+	}
+	public String getName(){
+		return name;
 	}
 	public List<Test> getTests(){
 		return tests;
