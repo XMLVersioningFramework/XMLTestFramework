@@ -21,6 +21,7 @@ server.pid
 *.iml
 *.eml
 conf/application.conf
+project/plugins.sbt
 
 #Ignore Linux
 *~

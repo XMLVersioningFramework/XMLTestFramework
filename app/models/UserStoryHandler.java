@@ -10,10 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserStoryHandler {
-	static String baseUrl="./userStorys";
+	static List<UserStory> userStories =new ArrayList<UserStory>();
+
+static String baseUrl="../userStories/";
+
+	public static List<UserStory> loadAllUserStories(){
 	
-	public static List<UserStory> loadAllUserStorys(){
-		List<UserStory> userStorys =new ArrayList<UserStory>();
 		final File folder = new File(baseUrl);
 		for (final File fileEntry : folder.listFiles()) {
 			//System.out.println("check file: "+fileEntry.getName());
@@ -23,12 +25,12 @@ public class UserStoryHandler {
 					//System.out.println("fileEntry2 is file compare: "+fileEntry2.getName());
 					if(fileEntry2.getName().equals("userSenario.html")){
 					//	System.out.println("existing user senarios:" + fileEntry.getName());
-						userStorys.add(new UserStory(getTotalFile(fileEntry2),new ArrayList<Test>()));
+						userStories.add(new UserStory(getTotalFile(fileEntry2),new ArrayList<Test>()));
 					}
 				}
 	        }
 		}
-		return userStorys;
+		return userStories;
 	}
 	public void getUserStoryInfo(String url){
 		String Userstory=getTotalFile(new File(baseUrl+url+"userStory.html"));
