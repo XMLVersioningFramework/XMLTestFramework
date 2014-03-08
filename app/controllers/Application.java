@@ -19,7 +19,7 @@ public class Application extends Controller {
     	List<Task> tasks = Task.find.all();
         return ok(views.html.index.render("Hello my framwork"+tasks.get(0).name));
     }
-    public static Result getTests(int userStoriesId) {
+    public static Result getTests(String userStoryName) {
     	List<Task> tasks = Task.find.all();
         return ok(views.html.index.render("Hello my framwork"+tasks.get(0).name));
     }
