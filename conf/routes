@@ -3,8 +3,8 @@
 # ~~~~
 
 GET     /                           controllers.Application.index()
-#GET     /getTests/:userStoriesId           controllers.Application.getTests(userStoriesId: int)
-#GET     /getUserStories           controllers.Application.getUserStories()
+GET     /getUserstories				controllers.Application.getUserstories()
+GET     /getAUserstory/:userStoryName				controllers.Application.getAUserstory(userStoryName: String)
 #GET     /addDataPoint/:id           controllers.Application.addDataPoint(id: String)
 
 # Map static resources from the /public folder to the /assets URL path

@@ -1,6 +1,6 @@
 import play.Project._
 
-name := """hello-play-java"""
+name := """XML versioning Test"""
 
 version := "1.0-SNAPSHOT"
 
