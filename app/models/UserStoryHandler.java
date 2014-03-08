@@ -3,9 +3,9 @@ package models;
 import java.io.File;
 
 public class UserStoryHandler {
-	static String baseUrl="../userStorys/";
+	static String baseUrl="../userStories/";
 	
-	public static void loadAllUserStorys(){
+	public static void loadAllUserStories(){
 		final File folder = new File(baseUrl);
 		for (final File fileEntry : folder.listFiles()) {
 			if (fileEntry.isDirectory()) {

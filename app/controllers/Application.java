@@ -14,7 +14,7 @@ public class Application extends Controller {
 	}
 	
     public static Result index() {
-    	UserStoryHandler.loadAllUserStorys();
+    	UserStoryHandler.loadAllUserStories();
     	List<Task> tasks = Task.find.all();
        	return ok(views.html.index.render("Hello my framwork"+tasks.get(0).name));
     }
