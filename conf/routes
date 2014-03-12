@@ -3,7 +3,7 @@
 # ~~~~
 
 GET     /                           controllers.Application.index()
-GET     /getUserstories				controllers.Application.getUserstories()
+GET     /getUserStories				controllers.Application.getUserstories()
 GET     /getAUserstory/:userStoryName				controllers.Application.getAUserstory(userStoryName: String)
 #GET     /addDataPoint/:id           controllers.Application.addDataPoint(id: String)
 
