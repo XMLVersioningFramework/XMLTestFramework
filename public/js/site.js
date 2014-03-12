@@ -1,6 +1,5 @@
-//import userstory
+var userStories=[];
 getUserStories();
-var userstories=[];
 function getUserStories(){
 	$.ajax({
 	  dataType: "json",
@@ -11,8 +10,12 @@ function getUserStories(){
 	function success(data){
 		
 		$(data).each(function(nr,story){
-			userstories.push(new userStory(story,story.test));
-			$("#listUserStories").append(story.name+"<br />");
+			console.log(story);
+			var tempUserStory=new userStory(story)
+			userStories.push(tempUserStory);
+			console.log(tempUserStory);
+			
+			$("#listUserStories").append(tempUserStory.getHTML());
 		});
 		//$("#listUserStories").html(data);
 		
@@ -23,10 +26,10 @@ function getUserStories(){
 	}
 }
 
-function getaUserStory(story){
+function getUserStory(story){
 	$.ajax({
 	  dataType: "json",
-	  url: "/getAUserStory/"+story,
+	  url: "/getUserStory/"+story,
 	  success: success,
 	  error: error
 	});
