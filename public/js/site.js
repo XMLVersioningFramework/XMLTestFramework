@@ -8,7 +8,12 @@ function getUserStories(){
 	  error: error
 	});
 	function success(data){
-		console.log(data);
+		
+		$(data).each(function(nr,story){
+			console.log(story);
+			$("#listUserStories").append(story.name+"<br />");
+		});
+		//$("#listUserStorys").html(data);
 		
 	}
 	function error(data){
@@ -17,7 +22,7 @@ function getUserStories(){
 	}
 }
 
-function getaUserStory(String story){
+function getaUserStory(story){
 	$.ajax({
 	  dataType: "json",
 	  url: "/getAUserstory/"+story,
@@ -26,6 +31,7 @@ function getaUserStory(String story){
 	});
 	function success(data){
 		console.log(data);
+		
 		
 	}
 	function error(data){

@@ -10,19 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserStoryHandler {
-	static List<UserStory> userStories =new ArrayList<UserStory>();
+	
 
-static String baseUrl="../userStories/";
+static String baseUrl="./userStories/";
 
 	public static List<UserStory> loadAllUserStories(){
-	
+		List<UserStory> userStories =new ArrayList<UserStory>();
 		final File folder = new File(baseUrl);
 		
 		
-		if(folder.listFiles().length==0){
-			System.out.println("the folder whas emty");
-			return null;
-		}
+		
 		
 		for (final File fileEntry : folder.listFiles()) {
 			//System.out.println("check file: "+fileEntry.getName());
@@ -30,7 +27,7 @@ static String baseUrl="../userStories/";
 				//System.out.println("is folder:");
 				for (final File fileEntry2 : fileEntry.listFiles()) {
 					//System.out.println("fileEntry2 is file compare: "+fileEntry2.getName());
-					if(fileEntry2.getName().equals("userSenario.html")){
+					if(fileEntry2.getName().equals("userStory.html")){
 					//	System.out.println("existing user senarios:" + fileEntry.getName());
 						userStories.add(new UserStory(fileEntry.getName(),getTotalFile(fileEntry2)));
 					}
@@ -40,16 +37,13 @@ static String baseUrl="../userStories/";
 		return userStories;
 	}
 	public static UserStory getUserStoryInfo(String url){
-		String Userstory=getTotalFile(new File(baseUrl+url+"userStory.html"));
+		String Userstory=getTotalFile(new File(baseUrl+url+"/userStory.html"));
 		
 		UserStory userStory=new UserStory(url, Userstory);
 		
 		final File folder = new File(baseUrl+url);
 		
-		if(folder.listFiles().length==0){
-			System.out.println("the folder whas emty");
-			return null;
-		}
+	
 		
 		for (final File fileEntry : folder.listFiles()) {//looping the folder
 			if (fileEntry.isDirectory()) {//tests
