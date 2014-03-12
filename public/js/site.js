@@ -4,7 +4,7 @@ var userstories=[];
 function getUserStories(){
 	$.ajax({
 	  dataType: "json",
-	  url: "/getUserstories",
+	  url: "/getUserStories",
 	  success: success,
 	  error: error
 	});
@@ -14,7 +14,7 @@ function getUserStories(){
 			userstories.push(new userStory(story,story.test));
 			$("#listUserStories").append(story.name+"<br />");
 		});
-		//$("#listUserStorys").html(data);
+		//$("#listUserStories").html(data);
 		
 	}
 	function error(data){
@@ -26,7 +26,7 @@ function getUserStories(){
 function getaUserStory(story){
 	$.ajax({
 	  dataType: "json",
-	  url: "/getAUserstory/"+story,
+	  url: "/getAUserStory/"+story,
 	  success: success,
 	  error: error
 	});
