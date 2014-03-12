@@ -17,7 +17,7 @@ function getUserStories(){
 		
 	}
 	function error(data){
-		alert("error");
+		alert("error listUserStories");
 		console.log(data);
 	}
 }
