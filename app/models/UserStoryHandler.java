@@ -30,8 +30,8 @@ static String baseUrl="../userStories/";
 				//System.out.println("is folder:");
 				for (final File fileEntry2 : fileEntry.listFiles()) {
 					//System.out.println("fileEntry2 is file compare: "+fileEntry2.getName());
-					if(fileEntry2.getName().equals("userSenario.html")){
-					//	System.out.println("existing user senarios:" + fileEntry.getName());
+					if(fileEntry2.getName().equals("userScenario.html")){
+					//	System.out.println("existing user scenarios:" + fileEntry.getName());
 						userStories.add(new UserStory(fileEntry.getName(),getTotalFile(fileEntry2)));
 					}
 				}

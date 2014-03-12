@@ -31,7 +31,7 @@ public class Application extends Controller {
      // 	return ok(views.html.index.render("Hello my framwork"));
 
     }
-    public static Result getUserstories() {
+    public static Result getUserStories() {
     	List<UserStory> userStories = UserStoryHandler.loadAllUserStories();
     	return ok(Json.toJson(userStories));
     }
