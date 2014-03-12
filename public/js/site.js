@@ -1,5 +1,6 @@
-
+//import userstory
 getUserStories();
+var userstories=[];
 function getUserStories(){
 	$.ajax({
 	  dataType: "json",
@@ -10,7 +11,7 @@ function getUserStories(){
 	function success(data){
 		
 		$(data).each(function(nr,story){
-			console.log(story);
+			userstories.push(new userStory(story,story.test));
 			$("#listUserStories").append(story.name+"<br />");
 		});
 		//$("#listUserStorys").html(data);
