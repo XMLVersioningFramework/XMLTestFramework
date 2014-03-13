@@ -1,5 +1,17 @@
 var userStories=[];
-getUserStories();
+
+$( document ).ready(function() {
+	getUserStories();
+	$("#runAllTests").click(function (arg) {
+		alert("running all tests");
+		$(userStories).each(function (i,story) {
+			$(story.tests).each(function (j,test) {
+				eval(test.run);
+			})
+			
+		});
+	});
+});
 function getUserStories(){
 	$.ajax({
 	  dataType: "json",
