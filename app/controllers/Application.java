@@ -32,15 +32,12 @@ public class Application extends Controller {
 
     }
     public static Result getUserStories() {
-    	List<UserStory> userStories = UserStoryHandler.loadAllUserStories();
-    	return ok(Json.toJson(userStories));
+    	String userStories = UserStoryHandler.loadAllUserStories();
+    	return ok(userStories);
     }
     public static Result getUserStory(String userStoryName) {
     	//List<Task> tasks = Task.find.all();
     	UserStory userStory = UserStoryHandler.getUserStoryInfo(userStoryName);
     	return ok(Json.toJson(userStory));
     }
-        
-    
-    
 }

@@ -14,27 +14,31 @@ public class UserStoryHandler {
 
 static String baseUrl="./userStories/";
 
-	public static List<UserStory> loadAllUserStories(){
+	public static String loadAllUserStories(){
 		List<UserStory> userStories =new ArrayList<UserStory>();
 		final File folder = new File(baseUrl);
 		
 		
-		
+		String tot="[";
 		
 		for (final File fileEntry : folder.listFiles()) {
 			//System.out.println("check file: "+fileEntry.getName());
+
 			if (fileEntry.isDirectory()) {
 				//System.out.println("is folder:");
 				for (final File fileEntry2 : fileEntry.listFiles()) {
 					//System.out.println("fileEntry2 is file compare: "+fileEntry2.getName());
-					if(fileEntry2.getName().equals("userStory.html")){
+					if(fileEntry2.getName().equals("userStory.json")){
 					//	System.out.println("existing user story:" + fileEntry.getName());
-						userStories.add(new UserStory(fileEntry.getName(),getTotalFile(fileEntry2)));
+						//userStories.add(new UserStory(fileEntry.getName(),getTotalFile(fileEntry2)));
+						tot+=getTotalFile(fileEntry2)+",";
 					}
 				}
 	        }
 		}
-		return userStories;
+		tot = tot.substring(0, tot.length()-1);
+		tot+="]";
+		return tot;
 	}
 	public static UserStory getUserStoryInfo(String url){
 		String Userstory=getTotalFile(new File(baseUrl+url+"/userStory.html"));
