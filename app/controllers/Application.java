@@ -35,9 +35,9 @@ public class Application extends Controller {
     	String userStories = UserStoryHandler.loadAllUserStories();
     	return ok(userStories);
     }
-    public static Result getUserStory(String userStoryName) {
+    public static Result getTests(String userStoryName) {
     	//List<Task> tasks = Task.find.all();
-    	UserStory userStory = UserStoryHandler.getUserStoryInfo(userStoryName);
+    	UserStory userStory = UserStoryHandler.getTests(userStoryName);
     	return ok(Json.toJson(userStory));
     }
 }

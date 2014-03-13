@@ -40,7 +40,7 @@ static String baseUrl="./userStories/";
 		tot+="]";
 		return tot;
 	}
-	public static UserStory getUserStoryInfo(String url){
+	public static UserStory getTests(String url){
 		String Userstory=getTotalFile(new File(baseUrl+url+"/userStory.html"));
 		
 		UserStory userStory=new UserStory(url, Userstory);

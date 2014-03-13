@@ -9,7 +9,7 @@ userStory=function (id,obj){
 	self.scenario=obj.scenario;
 	self.outcome=obj.outcome;
 	self.tags=obj.tags;
-
+//	console.log(self.tags);
 
 	self.getTitle=function () {
 		return title+"<br />";
