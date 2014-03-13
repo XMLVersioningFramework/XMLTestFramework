@@ -46,7 +46,21 @@ public class App {
 			 */
 			generateHTMLFile(row, entryPath);
 			
+			/**
+			 * Create 'userStory.json' based on the row and entry path
+			 */
+			generateJSONFile(row, entryPath);
 		}
+		
+	}
+
+	private static void generateJSONFile(String[] row, String entryPath) {
+		JSONGenerator jsonGenerator = new JSONGenerator(row);
+		
+		String userStoryPath = entryPath + "/userStory.json";
+		String userStoryContent = jsonGenerator.toString();
+		
+		FileManager.createFile(userStoryPath, userStoryContent);
 		
 	}
 
@@ -61,7 +75,6 @@ public class App {
 
 	private static void generateHTMLFile(String[] row, String entryPath) {
 		HTMLGenerator htmlGenerator = new HTMLGenerator(row);
-		htmlGenerator.getHtml();
 		
 		String userStoryPath = entryPath + "/userStory.html";
 		String userStoryContent = htmlGenerator.getHtml();

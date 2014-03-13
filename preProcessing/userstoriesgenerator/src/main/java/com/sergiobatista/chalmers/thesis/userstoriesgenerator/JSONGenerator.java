@@ -1,0 +1,96 @@
+package com.sergiobatista.chalmers.thesis.userstoriesgenerator;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+public class JSONGenerator {
+
+	private JSONObject json = new JSONObject();
+
+	/**
+	 * input: [0] Timestamp, [1] Title, [2] Use Case, [3] Preconditions, [4]
+	 * Actors, [5] Scenario, [6] Alternative Scenario, [7] Desired Outcome, [8]
+	 * tags
+	 */
+	public JSONGenerator(String[] input) {
+
+		this.setTitle(input[1]);
+		this.setUseCase(input[2]);
+		this.setPreConditions(input[3]);
+		this.setActors(input[4]);
+		this.setScenarios(input[5]);
+		this.setAltScenarios(input[6]);
+		this.setOutcome(input[7]);
+		this.setTags(input[8]);
+	}
+
+	@Override
+	public String toString() {
+		return json.toString();
+	}
+	
+
+	public JSONObject getJson() {
+		return json;
+	}
+
+	private void setTags(String input) {
+		JSONArray arr = new JSONArray();
+
+		breakIntoListItems(input, ", ", arr);
+
+		json.put("tags", arr);
+	}
+
+	private void setOutcome(String input) {
+		json.put("outcome", input);
+	}
+
+	private void setAltScenarios(String input) {
+		JSONArray arr = new JSONArray();
+
+		breakIntoListItems(input, ", ", arr);
+
+		json.put("alternativeScenarios", arr);
+	}
+
+	private void setScenarios(String input) {
+		JSONArray arr = new JSONArray();
+
+		breakIntoListItems(input, ", ", arr);
+
+		json.put("scenarios", arr);
+	}
+
+	private void setActors(String input) {
+		JSONArray arr = new JSONArray();
+
+		breakIntoListItems(input, ", ", arr);
+
+		json.put("actors", arr);
+	}
+
+	private void setPreConditions(String input) {
+		JSONArray arr = new JSONArray();
+
+		breakIntoListItems(input, ", ", arr);
+
+		json.put("preConditions", arr);
+	}
+
+	private void setUseCase(String input) {
+		json.put("useCase", input);
+	}
+
+	private void setTitle(String input) {
+		json.put("title", input);
+	}
+
+	private void breakIntoListItems(String input, String delimiter,
+			JSONArray arr) {
+		String[] elements = input.trim().split(delimiter);
+		for (String element : elements)
+			arr.put(element);
+	}
+
+}
