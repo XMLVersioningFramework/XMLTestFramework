@@ -9,6 +9,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
+import play.libs.Json;
+
 public class UserStoryHandler {
 	
 
@@ -31,7 +38,13 @@ static String baseUrl="./userStories/";
 					if(fileEntry2.getName().equals("userStory.json")){
 					//	System.out.println("existing user story:" + fileEntry.getName());
 						//userStories.add(new UserStory(fileEntry.getName(),getTotalFile(fileEntry2)));
-						tot+=getTotalFile(fileEntry2)+",";
+						ObjectMapper mapper = new ObjectMapper();
+						ObjectNode userStory=(ObjectNode)Json.parse(getTotalFile(fileEntry2));
+					 	//mapper.writeValue(arg0, userStory);
+					 	//System.out.println("||||||||||||"+userStory.get("uuid").asText()+"|<|");
+					 	getTests(userStory.putArray("tests"),userStory.get("uuid").asText());
+					 	//System.out.println(Json.toJson(userStory));
+						tot+=Json.toJson(userStory)+",";
 					}
 				}
 	        }
@@ -40,35 +53,36 @@ static String baseUrl="./userStories/";
 		tot+="]";
 		return tot;
 	}
-	public static UserStory getTests(String url){
-		String Userstory=getTotalFile(new File(baseUrl+url+"/userStory.html"));
+	public static void getTests(ArrayNode arrayNode,String userStoryUUID){
+		//String Userstory=getTotalFile(new File(baseUrl+arrayNode+"/userStory.html"));
 		
-		UserStory userStory=new UserStory(url, Userstory);
-		
-		final File folder = new File(baseUrl+url);
-		
-	
+		//UserStory userStory=new UserStory(arrayNode, Userstory);
+		//System.out.println(userStoryUUID);
+		final File folder = new File(baseUrl+userStoryUUID);
 		
 		for (final File fileEntry : folder.listFiles()) {//looping the folder
 			if (fileEntry.isDirectory()) {//tests
+				ObjectNode objectNode=arrayNode.addObject();
+				objectNode.put("run",getTotalFile(new File(baseUrl+userStoryUUID+"/"+fileEntry.getName()+"/run.js")));
+				objectNode.put("name",fileEntry.getName());
+
 				System.out.println("ett test: "+fileEntry.getName());
 				
-				Test test=new Test(fileEntry.getName());
-				userStory.addTests(test);
-				test.setRunFile(getTotalFile(new File(baseUrl+url+fileEntry.getName()+"/run.js")));
-				File input=new File(baseUrl+url+fileEntry.getName()+"/input");
+				ArrayNode inputArr=objectNode.putArray("input");
+				File input=new File(baseUrl+userStoryUUID+"/"+fileEntry.getName()+"/input");
+				System.out.println(baseUrl+userStoryUUID+"/"+fileEntry.getName()+"/input");
 				for (final File inputFile : input.listFiles()) {//looping the folder
-					test.addInput( getTotalFile(inputFile));
+					inputArr.add(inputFile.getName());
 				}
-				
-				File output=new File(baseUrl+url+fileEntry.getName()+"/output");
+				ArrayNode outputArr = objectNode.putArray("output");
+				File output=new File(baseUrl+userStoryUUID+"/"+fileEntry.getName()+"/output");
 				for (final File outputFile : output.listFiles()) {//looping the folder
-					test.addOutput( getTotalFile(outputFile));
+					outputArr.add(outputFile.getName());
 				}
 			}
 			
 		}
-		return userStory;
+		
 	}
 	
 	static String getTotalFile(File f){
