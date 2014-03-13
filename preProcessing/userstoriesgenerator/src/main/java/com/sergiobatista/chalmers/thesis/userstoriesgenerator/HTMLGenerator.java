@@ -82,7 +82,7 @@ public class HTMLGenerator {
 		String openTag = "<div class=\"pre-conditions\"><ul>";
 		String closeTag = "</ul></div>";
 		
-		String output = breakIntoListItems(input, ", ");
+		String output = breakIntoListItems(input, ",");
 
 		return openTag + output + closeTag;
 	}
@@ -99,7 +99,7 @@ public class HTMLGenerator {
 		String openTag = "<div class=\"actors\"><ul>";
 		String closeTag = "</ul></div>";
 
-		String output = breakIntoListItems(input, ", ");
+		String output = breakIntoListItems(input, ",");
 
 		return openTag + output + closeTag;
 	}

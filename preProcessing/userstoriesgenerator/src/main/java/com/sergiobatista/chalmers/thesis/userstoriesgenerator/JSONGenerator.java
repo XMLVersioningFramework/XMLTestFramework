@@ -94,7 +94,7 @@ public class JSONGenerator {
 	private void setAltScenario(String input) {
 		JSONArray arr = new JSONArray();
 
-		breakIntoListItems(input, ",", arr);
+		breakIntoListItems(input, ";", arr);
 
 		json.put("alternativeScenario", arr);
 	}
