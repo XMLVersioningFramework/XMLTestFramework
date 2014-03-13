@@ -74,6 +74,11 @@ public class JSONGenerator {
 		tags.put("where", arr);
 		
 	}
+	
+	/**
+	 * @deprecated
+	 * @param input
+	 */
 	private void setTags(String input) {
 		JSONArray arr = new JSONArray();
 
