@@ -22,8 +22,8 @@ public class JSONGenerator {
 		this.setUseCase(input[2]);
 		this.setPreConditions(input[3]);
 		this.setActors(input[4]);
-		this.setScenarios(input[5]);
-		this.setAltScenarios(input[6]);
+		this.setScenario(input[5]);
+		this.setAltScenario(input[6]);
 		this.setOutcome(input[7]);
 
 		/**
@@ -91,20 +91,20 @@ public class JSONGenerator {
 		json.put("outcome", input);
 	}
 
-	private void setAltScenarios(String input) {
+	private void setAltScenario(String input) {
 		JSONArray arr = new JSONArray();
 
 		breakIntoListItems(input, ",", arr);
 
-		json.put("alternativeScenarios", arr);
+		json.put("alternativeScenario", arr);
 	}
 
-	private void setScenarios(String input) {
+	private void setScenario(String input) {
 		JSONArray arr = new JSONArray();
 
 		breakIntoListItems(input, ";", arr);
 
-		json.put("scenarios", arr);
+		json.put("scenario", arr);
 	}
 
 	private void setActors(String input) {

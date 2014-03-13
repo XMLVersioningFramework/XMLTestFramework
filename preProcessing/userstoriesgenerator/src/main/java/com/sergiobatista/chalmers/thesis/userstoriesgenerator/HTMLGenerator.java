@@ -21,8 +21,8 @@ public class HTMLGenerator {
 		html += getUseCase(input[2]);
 		html += getPreConditions(input[3]);
 		html += getActors(input[4]);
-		html += getScenarios(input[5]);
-		html += getAltScenarios(input[6]);
+		html += getScenario(input[5]);
+		html += getAltScenario(input[6]);
 		html += getOutcome(input[7]);
 		html += getTags(input[8]);
 
@@ -112,7 +112,7 @@ public class HTMLGenerator {
 	 * </div>
 	 * 
 	 */
-	private String getScenarios(String input) {
+	private String getScenario(String input) {
 		String openTag = "<div class=\"scenario\"><ol>";
 		String closeTag = "</ol></div>";
 
@@ -129,7 +129,7 @@ public class HTMLGenerator {
 	 * </div>
 	 * 
 	 */
-	private String getAltScenarios(String input) {
+	private String getAltScenario(String input) {
 		if (!input.equalsIgnoreCase("")) {
 			String openTag = "<div class=\"alt-scenario\"><ol>";
 			String closeTag = "</ol></div>";
