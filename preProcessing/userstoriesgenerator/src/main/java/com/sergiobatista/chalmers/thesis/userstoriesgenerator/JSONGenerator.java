@@ -1,5 +1,6 @@
 package com.sergiobatista.chalmers.thesis.userstoriesgenerator;
 
+import org.apache.commons.lang3.text.WordUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -13,7 +14,9 @@ public class JSONGenerator {
 	 * tags, [9] Where, [10] How, [11] What
 	 */
 	public JSONGenerator(String[] input) {
-
+		String uuid = WordUtils.capitalizeFully(input[1].trim()).replaceAll(" ", "");
+		json.put("uuid", uuid);
+		
 		this.setTitle(input[1]);
 		this.setUseCase(input[2]);
 		this.setPreConditions(input[3]);
