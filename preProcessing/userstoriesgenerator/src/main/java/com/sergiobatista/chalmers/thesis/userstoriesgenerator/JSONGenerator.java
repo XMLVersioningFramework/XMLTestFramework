@@ -14,9 +14,10 @@ public class JSONGenerator {
 	 * tags, [9] Where, [10] How, [11] What
 	 */
 	public JSONGenerator(String[] input) {
-		String uuid = WordUtils.capitalizeFully(input[1].trim()).replaceAll(" ", "");
+		String uuid = WordUtils.capitalizeFully(input[1].trim()).replaceAll(
+				" ", "");
 		json.put("uuid", uuid);
-		
+
 		this.setTitle(input[1]);
 		this.setUseCase(input[2]);
 		this.setPreConditions(input[3]);
@@ -24,25 +25,24 @@ public class JSONGenerator {
 		this.setScenarios(input[5]);
 		this.setAltScenarios(input[6]);
 		this.setOutcome(input[7]);
-		
+
 		/**
-		 * uncomment for  the old version
+		 * uncomment for the old version
 		 */
-		//this.setTags(input[8]);
-		
+		// this.setTags(input[8]);
+
 		JSONObject tags = new JSONObject();
 		this.setWhere(input[9], tags);
 		this.setHow(input[10], tags);
 		this.setWhat(input[11], tags);
 		json.put("tags", tags);
-		
+
 	}
 
 	@Override
 	public String toString() {
 		return json.toString();
 	}
-	
 
 	public JSONObject getJson() {
 		return json;
@@ -54,7 +54,7 @@ public class JSONGenerator {
 		breakIntoListItems(input, ", ", arr);
 
 		tags.put("what", arr);
-		
+
 	}
 
 	private void setHow(String input, JSONObject tags) {
@@ -63,7 +63,7 @@ public class JSONGenerator {
 		breakIntoListItems(input, ", ", arr);
 
 		tags.put("how", arr);
-		
+
 	}
 
 	private void setWhere(String input, JSONObject tags) {
@@ -72,9 +72,9 @@ public class JSONGenerator {
 		breakIntoListItems(input, ", ", arr);
 
 		tags.put("where", arr);
-		
+
 	}
-	
+
 	/**
 	 * @deprecated
 	 * @param input
@@ -135,7 +135,8 @@ public class JSONGenerator {
 			JSONArray arr) {
 		String[] elements = input.trim().split(delimiter);
 		for (String element : elements)
-			arr.put(element);
+			if (!element.equalsIgnoreCase(""))
+				arr.put(element);
 	}
 
 }
