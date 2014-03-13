@@ -116,7 +116,7 @@ public class HTMLGenerator {
 		String openTag = "<div class=\"scenario\"><ol>";
 		String closeTag = "</ol></div>";
 
-		String output = breakIntoListItems(input, "; ");
+		String output = breakIntoListItems(input, ";");
 
 		return openTag + output + closeTag;
 	}
@@ -134,7 +134,7 @@ public class HTMLGenerator {
 			String openTag = "<div class=\"alt-scenario\"><ol>";
 			String closeTag = "</ol></div>";
 
-			String output = breakIntoListItems(input, "; ");
+			String output = breakIntoListItems(input, ";");
 
 			return openTag + output + closeTag;
 		} else
@@ -165,7 +165,7 @@ public class HTMLGenerator {
 		String openTag = "<div class=\"tags\"><ol>";
 		String closeTag = "</ol></div>";
 
-		String output = breakIntoListItems(input, ", ");
+		String output = breakIntoListItems(input, ",");
 
 		return openTag + output + closeTag;
 	}
@@ -173,8 +173,10 @@ public class HTMLGenerator {
 	private String breakIntoListItems(String input, String delimiter) {
 		String output = "";
 		String[] elements = input.trim().split(delimiter);
-		for (String element : elements)
+		for (String element : elements){
+			element = element.trim();
 			output += "<li>" + element + "</li>";
+		}
 		return output;
 	}
 }

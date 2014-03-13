@@ -51,7 +51,7 @@ public class JSONGenerator {
 	private void setWhat(String input, JSONObject tags) {
 		JSONArray arr = new JSONArray();
 
-		breakIntoListItems(input, ", ", arr);
+		breakIntoListItems(input, ",", arr);
 
 		tags.put("what", arr);
 
@@ -60,7 +60,7 @@ public class JSONGenerator {
 	private void setHow(String input, JSONObject tags) {
 		JSONArray arr = new JSONArray();
 
-		breakIntoListItems(input, ", ", arr);
+		breakIntoListItems(input, ",", arr);
 
 		tags.put("how", arr);
 
@@ -69,7 +69,7 @@ public class JSONGenerator {
 	private void setWhere(String input, JSONObject tags) {
 		JSONArray arr = new JSONArray();
 
-		breakIntoListItems(input, ", ", arr);
+		breakIntoListItems(input, ",", arr);
 
 		tags.put("where", arr);
 
@@ -82,7 +82,7 @@ public class JSONGenerator {
 	private void setTags(String input) {
 		JSONArray arr = new JSONArray();
 
-		breakIntoListItems(input, ", ", arr);
+		breakIntoListItems(input, ",", arr);
 
 		json.put("tags", arr);
 	}
@@ -94,7 +94,7 @@ public class JSONGenerator {
 	private void setAltScenarios(String input) {
 		JSONArray arr = new JSONArray();
 
-		breakIntoListItems(input, ", ", arr);
+		breakIntoListItems(input, ",", arr);
 
 		json.put("alternativeScenarios", arr);
 	}
@@ -102,7 +102,7 @@ public class JSONGenerator {
 	private void setScenarios(String input) {
 		JSONArray arr = new JSONArray();
 
-		breakIntoListItems(input, ", ", arr);
+		breakIntoListItems(input, ";", arr);
 
 		json.put("scenarios", arr);
 	}
@@ -110,7 +110,7 @@ public class JSONGenerator {
 	private void setActors(String input) {
 		JSONArray arr = new JSONArray();
 
-		breakIntoListItems(input, ", ", arr);
+		breakIntoListItems(input, ",", arr);
 
 		json.put("actors", arr);
 	}
@@ -118,7 +118,7 @@ public class JSONGenerator {
 	private void setPreConditions(String input) {
 		JSONArray arr = new JSONArray();
 
-		breakIntoListItems(input, ", ", arr);
+		breakIntoListItems(input, ",", arr);
 
 		json.put("preConditions", arr);
 	}
@@ -134,9 +134,11 @@ public class JSONGenerator {
 	private void breakIntoListItems(String input, String delimiter,
 			JSONArray arr) {
 		String[] elements = input.trim().split(delimiter);
-		for (String element : elements)
+		for (String element : elements) {
+			element = element.trim();
 			if (!element.equalsIgnoreCase(""))
 				arr.put(element);
+		}
 	}
 
 }
