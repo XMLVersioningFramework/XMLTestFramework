@@ -1,0 +1,5 @@
+## User Stories Generator
+generates the folder structure and description files based on the csv data for the user stories
+
+# Steps to edit
+1. Import as an existing maven project
