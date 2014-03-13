@@ -10,7 +10,7 @@ public class JSONGenerator {
 	/**
 	 * input: [0] Timestamp, [1] Title, [2] Use Case, [3] Preconditions, [4]
 	 * Actors, [5] Scenario, [6] Alternative Scenario, [7] Desired Outcome, [8]
-	 * tags
+	 * tags, [9] Where, [10] How, [11] What
 	 */
 	public JSONGenerator(String[] input) {
 
@@ -21,7 +21,18 @@ public class JSONGenerator {
 		this.setScenarios(input[5]);
 		this.setAltScenarios(input[6]);
 		this.setOutcome(input[7]);
-		this.setTags(input[8]);
+		
+		/**
+		 * uncomment for  the old version
+		 */
+		//this.setTags(input[8]);
+		
+		JSONObject tags = new JSONObject();
+		this.setWhere(input[9], tags);
+		this.setHow(input[10], tags);
+		this.setWhat(input[11], tags);
+		json.put("tags", tags);
+		
 	}
 
 	@Override
@@ -34,6 +45,32 @@ public class JSONGenerator {
 		return json;
 	}
 
+	private void setWhat(String input, JSONObject tags) {
+		JSONArray arr = new JSONArray();
+
+		breakIntoListItems(input, ", ", arr);
+
+		tags.put("what", arr);
+		
+	}
+
+	private void setHow(String input, JSONObject tags) {
+		JSONArray arr = new JSONArray();
+
+		breakIntoListItems(input, ", ", arr);
+
+		tags.put("how", arr);
+		
+	}
+
+	private void setWhere(String input, JSONObject tags) {
+		JSONArray arr = new JSONArray();
+
+		breakIntoListItems(input, ", ", arr);
+
+		tags.put("where", arr);
+		
+	}
 	private void setTags(String input) {
 		JSONArray arr = new JSONArray();
 
