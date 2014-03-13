@@ -1,6 +1,8 @@
 package com.sergiobatista.chalmers.thesis.userstoriesgenerator;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 
 public class FileManager {
 	public FileManager() {
@@ -20,6 +22,19 @@ public class FileManager {
 		} else
 			System.out.println("Dir: " + fullPath
 					+ " already exists, skipped creation");
+	}
+
+	public static void createFile(String filePath, String fileContent) {
+		PrintWriter out;
+		try {
+			out = new PrintWriter(filePath);
+			out.write(fileContent);
+			out.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 }
