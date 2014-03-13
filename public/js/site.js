@@ -65,9 +65,9 @@ function paintGraph() {
 
 	
 	$(userStories).each(function(nr,story){
-		console.log("userStories");
+		//console.log("userStories");
 		$(story.getTags().what).each(function(nr,what){
-			console.log(what);
+			//console.log(what);
 			if(typeof whats[what] === 'undefined'){
 				whats[what]=0;
 			}
@@ -86,15 +86,15 @@ function paintGraph() {
 			hows[how]++;
 		});
 	});
-	console.log("tags");
+	//console.log("tags");
 
 
-	console.log("what");
+	//console.log("what");
 	
 	var data=[];
 	var topics=[];
 	$.each( whats, function( index, value ){
-	    console.log(index+" :"+value);
+	    //console.log(index+" :"+value);
 		topics.push(index);
 		data.push(value);
 	});
@@ -102,9 +102,9 @@ function paintGraph() {
 
 	var data=[];
 	var topics=[];
-	console.log("where");
+	//console.log("where");
 	$.each( wheres, function( index, value ){
-	    console.log(index+" :"+value);
+	    //console.log(index+" :"+value);
 		topics.push(index);
 		data.push(value);
 	});
@@ -112,9 +112,9 @@ function paintGraph() {
 
 	var data=[];
 	var topics=[];
-	console.log("hows");
+	//console.log("hows");
 	$.each( hows, function( index, value ){
-	    console.log(index+" :"+value);
+	    //console.log(index+" :"+value);
 		topics.push(index);
 		data.push(value);
 	});
