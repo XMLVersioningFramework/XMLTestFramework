@@ -3,6 +3,7 @@ userStory=function (id,obj){
 	self.id=id;
 	console.log(obj);
 	self.title=obj.title;
+	self.uuid=obj.uuid;
 	self.useCase=obj.useCase;
 	self.preConditions=obj.preConditions;
 	self.actors=obj.actors;
@@ -10,6 +11,7 @@ userStory=function (id,obj){
 	self.alternativeScenario = obj.alternativeScenario;
 	self.outcome=obj.outcome;
 	self.tags=obj.tags;
+
 	self.tests=obj.tests;
 
 	self.getTitle=function () {
@@ -25,8 +27,67 @@ userStory=function (id,obj){
 		        </a>\
 		      </h4>\
 		    </div>\
-		    <div id="'+self.id+'" class="panel-collapse collapse">\
-				<div class="use-case">\
+		    <div id="'+self.id+'" class="panel-collapse collapse"><div class="row"><div class="col-md-6" id="rigth">'+self.getRigthColumn()+'</div><div class="col-md-6" id="left">'+self.getTagsHtml()+'</div>\
+			</div><div class="row"><div class="col-md-12">'+self.getTestHTML()+'</div></div>\
+			</div>\
+		</div>';
+  		return returnMsg;
+	}
+	self.getTagsHtml=function(){
+		var wraper = $('<div />').html("Tags");
+		var headUl = $('<ul/>').appendTo(wraper);
+
+		var whereLi = $('<li/>').appendTo(headUl);
+		$("<div/>").html("Where").appendTo(whereLi);
+		var whereUl = $('<ul/>').appendTo(whereLi);
+		$.each(self.tags.where, function(i,data){
+		    var li = $('<li/>')
+		 		.text(data)
+		        .appendTo(whereUl);
+		});
+		var howLi = $('<li/>').appendTo(headUl);
+		$("<div/>").html("How").appendTo(howLi);
+		var howUl = $('<ul/>').appendTo(howLi);
+		$.each(self.tags.how, function(i,data){
+		    var li = $('<li/>')
+		 		.text(data)
+		        .appendTo(howUl);
+		});
+		var whatLi = $('<li/>').appendTo(headUl);
+		$("<div/>").html("What").appendTo(whatLi);
+		var whatUl = $('<ul/>').appendTo(whatLi);
+		$.each(self.tags.what, function(i,data){
+		    var li = $('<li/>')
+		 		.text(data)
+		        .appendTo(whatUl);
+		});
+		return wraper[0].outerHTML;
+	}
+	self.getTestHTML=function(){
+		if(self.tests.length>0){
+			var wraper = $('<div />').html("Tests<br />");
+			$.each(self.tests, function(i,data){
+				console.log(data);
+				var button=$("<button class='"+self.uuid+"Tests' id='"+i+"'/>").html(data.name)
+				button.appendTo(wraper);
+			});
+			return wraper[0].outerHTML;
+		}else{
+			return "";
+		}
+	}
+	self.setDomListners=function(){
+		console.log("."+self.uuid+"Tests");
+		console.log($("."+self.uuid+"Tests"));
+		$('.'+self.uuid+'Tests').click(function(){
+			eval(self.tests[$(this).attr("id")].run);
+		});
+
+
+	}
+
+	self.getRigthColumn=function(){
+		var returnMsg='<div class="use-case">\
 					<h5>Use Case</h5>\
 					<p>'+self.useCase+'</p>\
 				</div>\
@@ -36,7 +97,6 @@ userStory=function (id,obj){
 		/* APPEND THE PRECONDITIONS */
 		var preConditionList = '';
  		$(self.preConditions).each(function(nr, preCondition){
- 			console.log(preCondition.toString());
  			preConditionList += "<li>"+preCondition.toString()+"</li>";
 		});
  		returnMsg+=preConditionList;
@@ -50,7 +110,6 @@ userStory=function (id,obj){
 		/* APPEND THE ACTORS */
 		var actorList = '';
  		$(self.actors).each(function(nr, actor){
- 			console.log(actor.toString());
  			actorList += "<li>"+actor.toString()+"</li>";
 		});
  		returnMsg+=actorList;
@@ -64,7 +123,6 @@ userStory=function (id,obj){
  			/* APPEND THE SCENARIOS */
  			var scenarioStepList = '';
  	 		$(self.scenario).each(function(nr, step){
- 	 			console.log("Scenario:" + step.toString());
  	 			scenarioStepList += "<li>"+step.toString()+"</li>";
  			});
  	 		returnMsg+=scenarioStepList;
@@ -81,7 +139,6 @@ userStory=function (id,obj){
 
 				var altScenarioStepList = '';
 	 	 		$(self.alternativeScenario).each(function(nr, step){
-	 	 			console.log("alternativeScenario:" + step.toString());
 	 	 			altScenarioStepList += "<li>"+step.toString()+"</li>";
 	 			});
 	 	 		returnMsg+=altScenarioStepList;
@@ -96,54 +153,8 @@ userStory=function (id,obj){
 				<div class="outcome">\
 		 			<h5>Expected Outcome</h5>\
 					<p>'+self.outcome+'</p>\
-				</div>\
-				<div class="tags">\
-			    	<h5>Tags</h5>\
-			    	<ul>';
-
-			/* APPEND THE TAGS */
-			var tagsList = '';
-			/* APPEND THE WHERE TAGS*/
-			tagsList+='\
-						<li>Where<ul>'
- 	 		$(self.tags.where).each(function(nr, tag){
- 				console.log("Tag:" + tag.toString());
-				tagsList += '\
-							<li>'+tag.toString()+'</li>';
-			});
-			tagsList+='\
-						</ul></li>';
-			/* APPEND THE HOW TAGS*/
-			tagsList+='\
-						<li>How<ul>'
- 	 		$(self.tags.how).each(function(nr, tag){
- 				console.log("Tag:" + tag.toString());
-				tagsList += '\
-							<li>'+tag.toString()+'</li>';
-			});
-			tagsList+='\
-						</ul></li>';
-
-			/* APPEND THE WHAT TAGS*/
-			tagsList+='\
-						<li>What<ul>'
- 	 		$(self.tags.what).each(function(nr, tag){
- 				console.log("Tag:" + tag.toString());
-				tagsList += '\
-							<li>'+tag.toString()+'</li>';
-			});
-			tagsList+='\
-						</ul></li>';
-
-			returnMsg+=tagsList;
-
-			/* CONTINUE WITH THE HTML */
-			returnMsg+='\
-					</ul>\
-				</div>\
-			</div>\
-		</div>';
-  		return returnMsg;
+				</div>';
+			return returnMsg;
 	}
 
 	self.getTags=function(){
