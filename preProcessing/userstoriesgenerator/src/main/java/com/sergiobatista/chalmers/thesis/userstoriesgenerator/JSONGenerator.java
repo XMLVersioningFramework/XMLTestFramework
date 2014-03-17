@@ -11,7 +11,7 @@ public class JSONGenerator {
 	/**
 	 * input: [0] Timestamp, [1] Title, [2] Use Case, [3] Preconditions, [4]
 	 * Actors, [5] Scenario, [6] Alternative Scenario, [7] Desired Outcome, [8]
-	 * tags, [9] Where, [10] How, [11] What
+	 * tags, [9] What, [10] Where, [11] How
 	 */
 	public JSONGenerator(String[] input) {
 		String uuid = WordUtils.capitalizeFully(input[1].trim()).replaceAll(
@@ -32,9 +32,9 @@ public class JSONGenerator {
 		// this.setTags(input[8]);
 
 		JSONObject tags = new JSONObject();
-		this.setWhere(input[9], tags);
-		this.setHow(input[10], tags);
-		this.setWhat(input[11], tags);
+		this.setWhere(input[10], tags);
+		this.setHow(input[11], tags);
+		this.setWhat(input[9], tags);
 		json.put("tags", tags);
 
 	}
