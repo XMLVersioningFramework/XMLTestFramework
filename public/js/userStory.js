@@ -18,20 +18,22 @@ userStory=function (id,obj){
 		return title+"<br />";
 	}
 	self.getHTML=function () {
-		var returnMsg='\
-		<div class="panel panel-default">\
-		    <div class="panel-heading">\
-		      <h4 class="panel-title">\
-		        <a data-toggle="collapse" data-parent="#accordion" href="#'+self.id+'">\
-		   			'+self.title+'\
-		        </a>\
-		      </h4>\
-		    </div>\
-		    <div id="'+self.id+'" class="panel-collapse collapse"><div class="row"><div class="col-md-6" id="rigth">'+self.getRigthColumn()+'</div><div class="col-md-6" id="left">'+self.getTagsHtml()+'</div>\
-			</div><div class="row"><div class="col-md-12">'+self.getTestHTML()+'</div></div>\
-			</div>\
-		</div>';
-  		return returnMsg;
+
+		var panel=$("<div>").addClass("panel panel-default")
+		var panelHeading=$("<div>").addClass("panel-heading").appendTo(panel);
+		var panelTitle=$("<h4>").addClass("panel-title").appendTo(panelHeading);
+		var collapseTopic=$("<a>").attr("data-toggle","collapse").attr("data-parent","#accordion").attr("href","#"+self.id).html(self.title).appendTo(panelTitle);
+		
+		//var collapseTopic=$("<a>").attr("data-toggle","collapse").attr("data-parent","#accordion").attr("href","#"+self.id).html(self.title).appendTo(panelTitle);
+		var collapseBody=$("<div>").addClass("panel-collapse collapse").attr("id",self.id).appendTo(panel);
+		var row=$("<div>").addClass("row").appendTo(collapseBody);
+		//var left=$("<div>").addClass("col-md-6").attr("id","rigth").html("adhjsad").appendTo("row");
+		var left=$("<div>").addClass("col-md-6").attr("id","rigth").append(self.getRigthColumn()).appendTo(row);
+		var left=$("<div>").addClass("col-md-6").attr("id","left").append(self.getTagsHtml()).appendTo(row);
+		var row2=$("<div>").addClass("row").appendTo(collapseBody);
+		var testes=$("<div>").addClass("col-md-12").append(self.getTestHTML()).appendTo(row2);
+	
+  		return panel;
 	}
 	self.getTagsHtml=function(){
 		var wraper = $('<div />').html("Tags");
@@ -61,31 +63,27 @@ userStory=function (id,obj){
 		 		.text(data)
 		        .appendTo(whatUl);
 		});
-		return wraper[0].outerHTML;
+		return wraper;
 	}
 	self.getTestHTML=function(){
 		if(self.tests.length>0){
 			var wraper = $('<div />').html("Tests<br />");
 			$.each(self.tests, function(i,data){
 				console.log(data);
-				var button=$("<button class='"+self.uuid+"Tests' id='"+i+"'/>").html(data.name)
+				var button=$("<button id='"+i+"'/>").html(data.name)
 				button.appendTo(wraper);
+				button.click(function(argument) {
+				//	alert("asdsad");
+					eval(self.tests[$(this).attr("id")].run);
+					// body...
+
+				})
 			});
-			return wraper[0].outerHTML;
+			return wraper;
 		}else{
 			return "";
 		}
 	}
-	self.setDomListners=function(){
-		console.log("."+self.uuid+"Tests");
-		console.log($("."+self.uuid+"Tests"));
-		$('.'+self.uuid+'Tests').click(function(){
-			eval(self.tests[$(this).attr("id")].run);
-		});
-
-
-	}
-
 	self.getRigthColumn=function(){
 		var returnMsg='<div class="use-case">\
 					<h5>Use Case</h5>\

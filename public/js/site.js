@@ -27,7 +27,7 @@ function getUserStories(){
 			var tempUserStory=new userStory(nr,story)
 			userStories.push(tempUserStory);
 			panelGroup.append(tempUserStory.getHTML());
-			tempUserStory.setDomListners();
+			//tempUserStory.setDomListners();
 			
 		});
 		//$("#listUserStories").html(data);
