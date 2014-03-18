@@ -24,14 +24,20 @@ public class FileManager {
 					+ " already exists, skipped creation");
 	}
 
-	public static void createFile(String filePath, String fileContent) {
+	public static void createFile(String fileContent, String fileName) {
+		String filePath = "./";
+		createFile(fileContent, fileName, filePath);
+	}
+
+	public static void createFile(String fileContent, String fileName,
+			String filePath) {
 		PrintWriter out;
 		try {
-			out = new PrintWriter(filePath);
+			out = new PrintWriter(filePath+fileName);
 			out.write(fileContent);
 			out.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			System.err.println("Couldn't write to the file, reason File Not found:");
 			e.printStackTrace();
 		}
 
