@@ -15,8 +15,17 @@ import java.util.*;
 
 public class Application extends Controller {
     
-	public static Result addDataPoint(String i) {
-		return ok(views.html.index.render("Hello my framwork"+i));
+	public static Result addDataPoint() {
+        final Map<String, String[]> post = request().body().asFormUrlEncoded();
+        
+        String valure=post.get("valure")[0];
+        String userSenario=post.get("test")[0];
+        String test=post.get("test")[0];
+
+        new 
+        System.out.println(post.get("valure")[0]);
+
+		return ok();
 	}
 	@BodyParser.Of(BodyParser.Json.class)
 	public static Result index() {

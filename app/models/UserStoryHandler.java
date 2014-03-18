@@ -71,13 +71,19 @@ static String baseUrl="./userStories/";
 				ArrayNode inputArr=objectNode.putArray("input");
 				File input=new File(baseUrl+userStoryUUID+"/"+fileEntry.getName()+"/input");
 				System.out.println(baseUrl+userStoryUUID+"/"+fileEntry.getName()+"/input");
-				for (final File inputFile : input.listFiles()) {//looping the folder
-					inputArr.add(inputFile.getName());
+
+				if(input.exists()){
+					for (final File inputFile : input.listFiles()) {//looping the folder
+						inputArr.add(inputFile.getName());
+					}
 				}
+
 				ArrayNode outputArr = objectNode.putArray("output");
 				File output=new File(baseUrl+userStoryUUID+"/"+fileEntry.getName()+"/output");
-				for (final File outputFile : output.listFiles()) {//looping the folder
-					outputArr.add(outputFile.getName());
+				if(output.exists()){
+					for (final File outputFile : output.listFiles()) {//looping the folder
+						outputArr.add(outputFile.getName());
+					}
 				}
 			}
 			
