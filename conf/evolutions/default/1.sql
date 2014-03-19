@@ -13,7 +13,7 @@ create table task (
 
 create table test_result (
   id                        bigint auto_increment not null,
-  value                     bigint,
+  value                     varchar(255),
   test_name                 varchar(255),
   back_end                  varchar(255),
   add_date                  datetime,

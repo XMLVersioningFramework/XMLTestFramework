@@ -14,18 +14,29 @@ public class TestResult extends Model {
   public Long id;
   
   @Constraints.Required
-  public Long value;
+  public String value;
   
   @Constraints.Required
   public String testName;
   
   @Constraints.Required
   public String backEnd;
-  
+ 
   
   @Formats.DateTime(pattern="dd/MM/yyyy")
   public Date addDate = new Date();
   
+  public void setBackEnd(String s){
+    backEnd=s;
+  }
+  public void setTestName(String s){
+    testName=s;
+  }
+  public void setValue(String s){
+    value=s;
+  }
+  
+
   public static Finder<Long,Task> find = new Finder<Long,Task>(
     Long.class, Task.class
   ); 

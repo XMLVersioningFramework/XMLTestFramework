@@ -3,6 +3,7 @@ package controllers;
 import play.mvc.Controller;
 import play.mvc.Result;
 import models.Task;
+import models.TestResult;
 import models.UserStory;
 import models.UserStoryHandler;
 import play.libs.Json;
@@ -18,13 +19,17 @@ public class Application extends Controller {
 	public static Result addDataPoint() {
         final Map<String, String[]> post = request().body().asFormUrlEncoded();
         
-        String valure=post.get("valure")[0];
-        String userSenario=post.get("test")[0];
-        String test=post.get("test")[0];
+        String value=post.get("value")[0];
+        String backend=post.get("backend")[0];
+        String testName=post.get("testName")[0];
 
-        new 
-        System.out.println(post.get("valure")[0]);
-
+       TestResult tr=new TestResult();
+        tr.setValue(value);
+        tr.setTestName(testName);
+        tr.setBackEnd(backend);
+       
+        //System.out.println(post.get("value")[0]);
+        
 		return ok();
 	}
 	@BodyParser.Of(BodyParser.Json.class)
