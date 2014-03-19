@@ -27,6 +27,7 @@ public class Application extends Controller {
         tr.setValue(value);
         tr.setTestName(testName);
         tr.setBackEnd(backend);
+        tr.save();
        
         //System.out.println(post.get("value")[0]);
         
