@@ -3,6 +3,8 @@ var file = $("<div>");
 var sendingNr = 100;
 var commonAPI = new CommonAPI();
 var msgFromServer = 0;
+
+commonAPI.initRepo();
 /*for (var i = 0; i <= sendingNr; i++) {
 */
 	commonAPI.commit("a.txt", file[0].outerHTML,"texts", returnmsg);

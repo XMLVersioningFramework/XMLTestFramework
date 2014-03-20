@@ -21,6 +21,16 @@ CommonAPI=function (){
 		}
 
 	}
+	self.initRepo =function(){
+		$.ajax({
+		  type: "POST",
+		  url: "http://"+server+":"+port+"/initRepository",
+		  success: sucsess
+		});
+		var sucsess=function(data) {
+		}
+	}
+	commonAPI.
 	self.test= function () {
 		
 	}
