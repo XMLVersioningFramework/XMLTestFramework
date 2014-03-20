@@ -8,32 +8,21 @@ CommonAPI=function (){
 	self.connect=function(server, port){
 
 	}
-	self.commit = function(url,content,returnFunction){
-		var returnFromCommonAPIJson = {};
-		returnFromCommonAPIJson.time=12;
-		returnFromCommonAPIJson.succsess=1;
-
-		var data={url:url,content:content,user:0,backend:"git"};
+	self.commit = function(url,content,message,returnFunction){
+		var data={url:url,content:content,message:message,user:0,backend:"git"};
 		$.ajax({
 		  type: "POST",
-		  url: "http://"+server+":"+port,
+		  url: "http://"+server+":"+port+"/commit",
 		  data: data,
 		  success: sucsess
 		});
 		var sucsess=function(data) {
-		  	console.log("sending datapoint to server");
+		  	returnFunction(data);
 		}
-
-		returnFunction(returnFromCommonAPIJson);
 
 	}
 	self.test= function () {
 		
 	}
 		
-		
-	
-
-
 }
-

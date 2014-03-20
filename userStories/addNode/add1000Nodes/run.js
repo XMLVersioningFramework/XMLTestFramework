@@ -5,7 +5,7 @@ var commonAPI = new CommonAPI();
 var msgFromServer = 0;
 /*for (var i = 0; i <= sendingNr; i++) {
 */
-	commonAPI.commit("a.txt", file[0].outerHTML, returnmsg);
+	commonAPI.commit("a.txt", file[0].outerHTML,"texts", returnmsg);
 	$("<div>").attr("id", i).appendTo(file);
 /*};*/
 
