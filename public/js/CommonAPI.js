@@ -30,7 +30,6 @@ CommonAPI=function (){
 		var sucsess=function(data) {
 		}
 	}
-	commonAPI.
 	self.test= function () {
 		
 	}
