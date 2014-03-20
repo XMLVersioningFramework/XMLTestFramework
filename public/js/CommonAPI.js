@@ -17,10 +17,15 @@ CommonAPI=function (){
 		  success: sucsess
 		});
 		var sucsess=function(data) {
+			// Data(json)
+			// Time
+			// Status(boolean)
+			
 		  	returnFunction(data);
 		}
 
 	}
+
 	self.initRepo =function(){
 		$.ajax({
 		  type: "POST",
@@ -29,9 +34,6 @@ CommonAPI=function (){
 		});
 		var sucsess=function(data) {
 		}
-	}
-	self.test= function () {
-		
 	}
 		
 }
