@@ -13,7 +13,7 @@ CommonAPI=function (){
 		returnFromCommonAPIJson.time=12;
 		returnFromCommonAPIJson.succsess=1;
 
-		var data={testName:"add1000nodes",value:"sad",backend:"git"};
+		var data={url:url,content:content,user:0,backend:"git"};
 		$.ajax({
 		  type: "POST",
 		  url: "http://"+server+":"+port,
