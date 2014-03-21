@@ -2,8 +2,11 @@ package controllers;
 
 import java.util.Map;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import models.TestResult;
 import models.UserStoryHandler;
+import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -50,4 +53,24 @@ public class Application extends Controller {
     	//UserStory userStory = UserStoryHandler.getTests(userStoryName);
     	return ok();
     }
+    public static Result compareXML() {
+    	final Map<String, String[]> post = request().body().asFormUrlEncoded();
+    	String orginalText=post.get("orginalText")[0];
+        String newText=post.get("newText")[0];
+    	System.out.println(orginalText);
+    	System.out.println(newText);
+    	
+    	
+    	ObjectNode returnJson=Json.newObject();
+    	if(orginalText.equals(newText)){
+    		returnJson.put("simularity", "100%");
+    	}else{
+    		returnJson.put("simularity", "not 100%");
+    	}
+		
+    	return ok(returnJson);
+    }
+    
+    
+    
 }

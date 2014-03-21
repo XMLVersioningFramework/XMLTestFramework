@@ -67,6 +67,24 @@ function getUserStory(story){
 		console.log(data);
 	}
 }
+function compare(orginalText,newText){
+	return new Promise(function(resolve, reject) {
+		var data={orginalText:orginalText,newText:newText};
+		 var ajaxRequest=$.ajax({
+		  type: "POST",
+		  url: "./compareXML",
+		  data: data
+		});
+		
+		ajaxRequest.done(function (response, textStatus, jqXHR){
+			resolve(response);
+		});
+		
+		ajaxRequest.fail(function (response, textStatus, jqXHR){
+			reject(response);
+		});
+	}); 
+}
 
 function paintGraph() {
 	//summirize tags 
