@@ -55,19 +55,19 @@ public class Application extends Controller {
     }
     public static Result compareXML() {
     	final Map<String, String[]> post = request().body().asFormUrlEncoded();
-    	String orginalText=post.get("orginalText")[0];
-        String newText=post.get("newText")[0];
-    	System.out.println(orginalText);
-    	System.out.println(newText);
+    	String expected=post.get("expected")[0];
+        String actual=post.get("actual")[0];
+    	System.out.println(expected);
+    	System.out.println(actual);
     	
     	
     	ObjectNode returnJson=Json.newObject();
-    	if(orginalText.equals(newText)){
+    	if(expected.equals(actual)){
     		returnJson.put("simularity", "100%");
     	}else{
     		returnJson.put("simularity", "not 100%");
     	}
-		
+
     	return ok(returnJson);
     }
     

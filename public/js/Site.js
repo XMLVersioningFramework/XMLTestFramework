@@ -67,9 +67,9 @@ function getUserStory(story){
 		console.log(data);
 	}
 }
-function compare(orginalText,newText){
+function compare(expected,actual){
 	return new Promise(function(resolve, reject) {
-		var data={orginalText:orginalText,newText:newText};
+		var data={actual:actual,expected:expected};
 		 var ajaxRequest=$.ajax({
 		  type: "POST",
 		  url: "./compareXML",
