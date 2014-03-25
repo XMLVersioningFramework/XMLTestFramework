@@ -12,4 +12,5 @@ libraryDependencies ++= Seq(
 
 libraryDependencies += javaEbean
 
+
 playJavaSettings
