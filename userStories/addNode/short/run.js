@@ -1,7 +1,7 @@
 alert("comparing");
 /* compare (expected, actual) */
 compare("<abc>", "<abc>").then(function(response) {
-    alert("Success!");
+  alert("Success!");
 }, function(error) {
-    alert("Failed!");
+  alert("Failed!");
 });
