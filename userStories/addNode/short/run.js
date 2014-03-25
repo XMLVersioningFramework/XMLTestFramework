@@ -1,4 +1,4 @@
-alert("commparing");
+alert("comparing");
 /* compare (expected, actual) */
 compare("<abc>", "<abc>").then(function(response) {
     alert("Success!");

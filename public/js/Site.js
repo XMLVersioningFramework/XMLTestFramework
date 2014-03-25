@@ -93,7 +93,7 @@ function compare(expected, actual) {
 }
 
 function paintGraph() {
-    // summirize tags
+    // summarize tags
     var hows = {};
     var wheres = {};
     var whats = {};

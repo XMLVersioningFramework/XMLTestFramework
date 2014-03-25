@@ -18,23 +18,23 @@ function returnmsg(data) {
     var time = data.time;
     totalTime += time;
     if (sendingNr === msgFromServer) {
-	console.log("all msg resived");
+	console.log("all msg received");
 	console.log("totalTime" + totalTime);
 	commonAPI.getHEAD().then(
 		function(data) {
-		    alert("first promess okej");
+		    alert("first promise ok");
 		    console.log(data.files[0].fileContent);
 		    console.log("vs");
 		    console.log(file[0].outerHTML);
 		    compare(file[0].outerHTML, data.files[0].fileContent).then(
 			    function(fromServer) {
 				if (fromServer.simularity == "100%") {
-				    alert("samme");
+				    alert("same");
 				    addDataPoinOnServer("100TestsTest",
 					    totalTime);
 				}
 				{
-				    alert("not samme");
+				    alert("not same");
 				}
 			    }, function(argument) {
 				alert("adding to server");

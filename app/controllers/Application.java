@@ -65,9 +65,9 @@ public class Application extends Controller {
 
 	ObjectNode returnJson = Json.newObject();
 	if (expected.equals(actual)) {
-	    returnJson.put("simularity", "100%");
+	    returnJson.put("similarity", "100%");
 	} else {
-	    returnJson.put("simularity", "not 100%");
+	    returnJson.put("similarity", "not 100%");
 	}
 
 	return ok(returnJson);

@@ -1,2 +1,2 @@
-alert("runing long js");
+alert("running long js");
 /* commonAPI.commit() */
