@@ -3,10 +3,12 @@
 # ~~~~
 
 GET     /                           controllers.Application.index()
-GET     /getUserStories				controllers.Application.getUserStories()
-GET     /getTests/:userStoryName	controllers.Application.getTests(userStoryName: String)
-POST     /addDataPoint          	controllers.Application.addDataPoint()
-POST     /compareXML         		controllers.Application.compareXML()
+
+GET     /getUserStories             controllers.Application.getUserStories()
+GET     /getTests/:userStoryName    controllers.Application.getTests(userStoryName: String)
+POST    /addDataPoint               controllers.Application.addDataPoint()
+
+POST    /compareXML                 controllers.ComparisonHandler.compareXML()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

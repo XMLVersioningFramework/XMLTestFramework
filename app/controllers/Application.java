@@ -2,11 +2,8 @@ package controllers;
 
 import java.util.Map;
 
-import com.fasterxml.jackson.databind.node.ObjectNode;
-
 import models.TestResult;
 import models.UserStoryHandler;
-import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -56,21 +53,11 @@ public class Application extends Controller {
 	return ok();
     }
 
+    /**
+     * @deprecated Use {@link ComparisonHandler#compareXML()} instead
+     */
     public static Result compareXML() {
-	final Map<String, String[]> post = request().body().asFormUrlEncoded();
-	String expected = post.get("expected")[0];
-	String actual = post.get("actual")[0];
-	System.out.println(expected);
-	System.out.println(actual);
-
-	ObjectNode returnJson = Json.newObject();
-	if (expected.equals(actual)) {
-	    returnJson.put("similarity", "100%");
-	} else {
-	    returnJson.put("similarity", "not 100%");
-	}
-
-	return ok(returnJson);
+        return ComparisonHandler.compareXML();
     }
 
 }
