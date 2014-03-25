@@ -8,8 +8,9 @@ commonAPI.initRepo();
 console.log("stared 100 tests test");
 
 for (var i = 0; i < sendingNr; i++) {
-	commonAPI.commit("a.txt", file[0].outerHTML,"texts", returnmsg);
 	$("<div>").attr("id", i).appendTo(file);
+	commonAPI.commit("a.txt", file[0].outerHTML,"texts", returnmsg);
+	
 };
 
 var totalTime = 0;

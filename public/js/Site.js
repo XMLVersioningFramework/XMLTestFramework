@@ -1,6 +1,15 @@
 var userStories=[];
+var backends=["git","Xcronicler"];
+var currentBackend="git";
 
 $( document ).ready(function() {
+	$(backends).each(function(i,data){
+		$("#backends").append('<option value='+i+'>'+data+'</option>');
+	})
+	$("#backends").change(function() {
+		currentBackend=backends[$(this).val()];
+	});
+
 	getUserStories();
 	$("#runAllTests").click(function (arg) {
 		alert("running all tests");
@@ -10,6 +19,24 @@ $( document ).ready(function() {
 			})
 			
 		});
+	});
+	$(".menuRunTest").click(function (a) {
+		console.log(a);
+		var userstory=$(a.target).attr("userstory");
+		var test=$(a.target).attr("test");
+		$(userStories).each(function (i,aStory) {
+			//console.log(aStory.getUuid());
+			if(aStory.getUuid()==userstory){
+				$(aStory.tests).each(function (j,aTest) {
+			//		console.log(aTest.name);
+					if(test==aTest.name){
+						eval(aTest.run);
+					}
+				});
+			}
+
+		})
+
 	});
 });
 function getUserStories(){
@@ -28,9 +55,7 @@ function getUserStories(){
 			userStories.push(tempUserStory);
 			panelGroup.append(tempUserStory.getHTML());
 			//tempUserStory.setDomListners();
-			
 		});
-		//$("#listUserStories").html(data);
 		paintGraph();
 
 	}

@@ -15,7 +15,10 @@ userStory=function (id,obj){
 	self.tests=obj.tests;
 
 	self.getTitle=function () {
-		return title+"<br />";
+		return self.title;
+	}
+	self.getUuid=function () {
+		return self.uuid;
 	}
 	self.getHTML=function () {
 

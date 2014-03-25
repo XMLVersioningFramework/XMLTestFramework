@@ -9,7 +9,7 @@ CommonAPI=function (){
 
 	}
 	self.commit = function(url,content,message,returnFunction){
-		var data={url:url,content:content,message:message,user:0,backend:"git"};
+		var data={url:url,content:content,message:message,user:0,backend:currentBackend};
 		var ajaxRequest=$.ajax({
 		  type: "POST",
 		  url: "http://"+server+":"+port+"/commit",
@@ -31,9 +31,11 @@ CommonAPI=function (){
 
 	self.getHEAD=function(){
 		return new Promise(function(resolve, reject) {
+			var data={user:0,backend:currentBackend};
 			var ajaxRequest=$.ajax({
 			  type: "POST",
 			  url: "http://"+server+":"+port+"/getHEAD",
+			  data: data
 			});
 			ajaxRequest.done(function (response, textStatus, jqXHR){
 	    		resolve(response);
@@ -45,10 +47,12 @@ CommonAPI=function (){
 	}
 
 	self.initRepo =function(){
+		var data={user:0,backend:currentBackend};
 		$.ajax({
 		  type: "POST",
 		  url: "http://"+server+":"+port+"/initRepository",
-		  success: success
+		  success: success,
+		  data: data
 		});
 		var success=function(data) {
 			console.log("init repo");
