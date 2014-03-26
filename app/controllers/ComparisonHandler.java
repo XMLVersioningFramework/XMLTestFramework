@@ -98,8 +98,8 @@ public class ComparisonHandler extends Controller {
 	XMLUnit.setCompareUnmatched(false);
 	XMLUnit.setExpandEntityReferences(true);
 	XMLUnit.setIgnoreComments(false);
-	XMLUnit.setIgnoreAttributeOrder(true);
 	XMLUnit.setIgnoreDiffBetweenTextAndCDATA(true);
+	XMLUnit.setIgnoreAttributeOrder(true);
 	XMLUnit.setIgnoreWhitespace(true);
 	XMLUnit.setNormalize(true);
 	XMLUnit.setNormalizeWhitespace(false);

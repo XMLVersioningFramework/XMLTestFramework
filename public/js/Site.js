@@ -11,7 +11,7 @@ $( document ).ready(function() {
   });
 
   getUserStories();
-  $("#runAllTests").click(function (arg) {
+  $(".runAllTests").click(function (arg) {
     alert("running all tests");
     $(userStories).each(function (i,story) {
       $(story.tests).each(function (j,test) {
