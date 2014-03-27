@@ -8,13 +8,14 @@ CommonAPI=function (){
   self.connect=function(server, port){
 
   }
-  self.commit = function(url,content,message){
+  self.commit = function(url,content,message,async){
     return new Promise(function(resolve, reject) {
       var data={url:url,content:content,message:message,user:0,backend:currentBackend};
       var ajaxRequest=$.ajax({
         type: "POST",
         url: "http://"+server+":"+port+"/commit",
-        data: data
+        data: data,
+        async: async
       });
 
 

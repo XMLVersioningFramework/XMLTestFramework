@@ -1,6 +1,10 @@
 var userStories=[];
 var backends=["git","Xcronicler"];
 var currentBackend="git";
+var nrSuccess=0;
+var nrPending=0;
+var nrFail=0;
+var nrNotRunned=0;
 
 $( document ).ready(function() {
   $(backends).each(function(i,data){
@@ -10,12 +14,21 @@ $( document ).ready(function() {
     currentBackend=backends[$(this).val()];
   });
 
-  getUserStories();
+  loadUserStories();
   $(".runAllTests").click(function (arg) {
     alert("running all tests");
     $(userStories).each(function (i,story) {
       $(story.tests).each(function (j,test) {
-        eval(test.run);
+        var millisecondsToWait = 100;
+        var refreshInterval = setInterval(function() {
+           if(nrPending==0){
+              clearInterval(refreshInterval);
+              reportIn(story.getUuid(),test.name,"pending");
+              $.getScript("assets/userStories/"+test.runFile, function(){
+                });
+            }
+
+        }, millisecondsToWait);
       })
       
     });
@@ -24,22 +37,17 @@ $( document ).ready(function() {
     console.log(a);
     var userstory=$(a.target).attr("userstory");
     var test=$(a.target).attr("test");
-    $(userStories).each(function (i,aStory) {
-      //console.log(aStory.getUuid());
-      if(aStory.getUuid()==userstory){
-        $(aStory.tests).each(function (j,aTest) {
-      //    console.log(aTest.name);
-      if(test==aTest.name){
-        eval(aTest.run);
-      }
-    });
-      }
-
+    var aStory=getUserStory(userstory);
+    console.log(aStory);
+    var aTest = getTest(aStory,test);
+    reportIn(userstory,test,"pending");
+    $.getScript("assets/userStories/"+aTest.runFile, function(a,b,c){
+        
     })
 
   });
 });
-function getUserStories() {
+function loadUserStories() {
   $.ajax({
    dataType : "json",
    url : "/getUserStories",
@@ -57,7 +65,7 @@ function getUserStories() {
           // tempUserStory.setDomListners();
 
         });
-
+   updateStatus();
    paintGraph();
 
  }
@@ -66,6 +74,71 @@ function getUserStories() {
    console.log(data);
  }
 }
+function getUserStory(userStoryUuid){
+  var returnStory=null;
+  $(userStories).each(function (i,aStory) {
+    if(aStory.getUuid()==userStoryUuid){
+      returnStory=aStory;
+    }
+  });
+  return returnStory;
+}
+function getTest(userStory,testName){
+  var returnTest=null;
+  $(userStory.tests).each(function (j,aTest) {
+    console.log(aTest.name+" --- "+testName);
+      if(testName==aTest.name){ 
+        returnTest=aTest;
+       
+      }
+  })
+  return returnTest;
+}
+
+
+function reportIn(userStoryUuid,testName,status){
+  console.log(userStoryUuid+" | "+testName);
+  var userStory=getUserStory(userStoryUuid);
+  var test=getTest(userStory,testName);
+  console.log("test set: ");
+  console.log(test);
+  if(status=="success"){
+    test.status="success";
+  }else if(status=="pending"){
+    test.status="pending";
+  }else if(status=="fail"){
+    test.status="fail";
+  }else{
+    alert("unknown status : "+status);
+  }
+  userStory.updateStatus();
+ // alert(nrSuccess+" / "+nrPending+" / "+nrFail+" / "+nrNotRunned);
+ updateStatus();
+}
+
+function updateStatus() {
+  nrSuccess=0;
+  nrPending=0;
+  nrFail=0;
+  nrNotRunned=0;
+  $(userStories).each(function (i,aStory) {
+    $(aStory.tests).each(function (j,aTest) {
+      if(aTest.status=="success"){
+        nrSuccess++;
+      }else if(aTest.status=="pending"){
+        nrPending++;
+      }else if(aTest.status=="fail"){
+        nrFail++;
+      }else{
+        nrNotRunned++;
+      }
+    });
+  });
+  // console.log($(".testCounter"));
+  $(".testCounter").html(nrSuccess+" / "+nrPending+" / "+nrFail+" / "+nrNotRunned);
+} 
+
+
 function addDataPoinOnServer(testName, value) {
   var data = {
    testName : testName,
@@ -81,7 +154,8 @@ function addDataPoinOnServer(testName, value) {
    }
  });
 }
-function getUserStory(story) {
+/*
+function loadUserStories(story) {
   $.ajax({
    dataType : "json",
    url : "/getUserStory/" + story,
@@ -97,6 +171,7 @@ function getUserStory(story) {
    console.log(data);
  }
 }
+*/
 function compare(expected, actual) {
   return new Promise(function(resolve, reject) {
    var data = {

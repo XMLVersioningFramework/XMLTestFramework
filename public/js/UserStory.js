@@ -11,6 +11,7 @@ userStory = function(id, obj) {
   self.alternativeScenario = obj.alternativeScenario;
   self.outcome = obj.outcome;
   self.tags = obj.tags;
+  self.refHtml=null;
 
   self.tests = obj.tests;
 
@@ -43,7 +44,7 @@ userStory = function(id, obj) {
     var row2 = $("<div>").addClass("row").appendTo(collapseBody);
     var testes = $("<div>").addClass("col-md-12").append(self.getTestHTML())
         .appendTo(row2);
-
+    self.refHtml=panel;
     return panel;
   }
   self.getTagsHtml = function() {
@@ -77,10 +78,11 @@ userStory = function(id, obj) {
         console.log(data);
         var button = $("<button id='" + i + "'/>").html(data.name)
         button.appendTo(wraper);
+        this.refHtml=button;
         button.click(function(argument) {
-          // alert("asdsad");
-          eval(self.tests[$(this).attr("id")].run);
-          // body...
+          reportIn(self.uuid,self.tests[$(this).attr("id")].name,"pending");
+          $.getScript("assets/userStories/"+self.tests[$(this).attr("id")].runFile, function(){
+          });
 
         });
       });
@@ -163,4 +165,42 @@ userStory = function(id, obj) {
   self.getTags = function() {
     return self.tags;
   }
+  self.updateStatus=function() {
+    var worst="notRun";
+    console.log(self.refHtml);
+    
+
+    for (var i = self.tests.length - 1; i >= 0; i--) {
+      console.log("test i: "+i);
+      console.log(self.tests[i].status);
+      if(self.tests[i].status=="fail"){
+        worst="fail";
+        self.tests[i].refHtml.css("background-color", "red");
+      }else if(self.tests[i].status=="pending"){
+        self.tests[i].refHtml.css("background-color", "blue");
+        if(worst!="fail"){
+          worst="pending";
+        }
+      }else if(self.tests[i].status=="success"){
+         self.tests[i].refHtml.css("background-color", "green");
+        if(worst!="fail"&& worst!="pending"){
+          worst="success";
+        }
+      }
+      if(worst=="success"){
+        self.refHtml.find(".panel-heading").css({'background-image': '-webkit-linear-gradient(top,rgb(12, 194, 85) 0,rgb(114, 248, 25) 100%)'});
+      }else if(worst=="pending"){
+        self.refHtml.find(".panel-heading").css({'background-image': '-webkit-linear-gradient(top,rgb(64, 166, 247) 0px,rgb(25, 239, 248) 100%)'});
+   
+      }else if(worst=="fail"){
+        self.refHtml.find(".panel-heading").css({'background-image': '-webkit-linear-gradient(top, rgb(179, 2, 2) 0px, rgb(248, 44, 44) 100%)'});
+      }
+
+
+
+
+    };
+  }
+
+
 }

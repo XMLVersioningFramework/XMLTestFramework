@@ -18,7 +18,7 @@ import play.libs.Json;
 
 public class UserStoryHandler {
 
-    static String baseUrl = "./userStories/";
+    static String baseUrl = "./public/userStories/";
 
     public static String loadAllUserStories() {
 	List<UserStory> userStories = new ArrayList<UserStory>();
@@ -67,9 +67,11 @@ public class UserStoryHandler {
 	for (final File fileEntry : folder.listFiles()) {// looping the folder
 	    if (fileEntry.isDirectory()) {// tests
 		ObjectNode objectNode = arrayNode.addObject();
-		objectNode.put("run",
-			getTotalFile(new File(baseUrl + userStoryUUID + "/"
+		objectNode.put("run",getTotalFile(new File(baseUrl + userStoryUUID + "/"
 				+ fileEntry.getName() + "/run.js")));
+		
+		objectNode.put("runFile", userStoryUUID + "/"
+				+ fileEntry.getName() + "/run.js");
 		objectNode.put("name", fileEntry.getName());
 
 		System.out.println("ett test: " + fileEntry.getName());
