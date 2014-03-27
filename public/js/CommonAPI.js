@@ -4,13 +4,20 @@ CommonAPI=function (){
   self=this;
   var server="localhost";
   var port="9001";
+  var userId="0";
+
 
   self.connect=function(server, port){
 
   }
+  self.setUser=function(tUserId) {
+    userId=tUserId;
+  }
+
+
   self.commit = function(url,content,message,async){
     return new Promise(function(resolve, reject) {
-      var data={url:url,content:content,message:message,user:0,backend:currentBackend};
+      var data={url:url,content:content,message:message,user:userId,backend:currentBackend};
       var ajaxRequest=$.ajax({
         type: "POST",
         url: "http://"+server+":"+port+"/commit",
