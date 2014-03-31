@@ -19,7 +19,7 @@ public class App {
 	/**
 	 * Path for the repository location
 	 */
-	static final String REPOSITORY_PATH = "../../userStories/";
+	static final String REPOSITORY_PATH = "../../public/userStories/";
 
 	/**
 	 * File name of the csv used for input
