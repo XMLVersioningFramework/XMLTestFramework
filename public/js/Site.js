@@ -1,5 +1,5 @@
 var userStories=[];
-var backends=["git","Xcronicler"];
+var backends=["git","XChronicler"];
 var currentBackend="git";
 var nrSuccess=0;
 var nrPending=0;
@@ -11,6 +11,12 @@ $( document ).ready(function() {
     $("#backends").append('<option value='+i+'>'+data+'</option>');
   })
   $("#backends").change(function() {
+    $(userStories).each(function (i,story) {
+      $(story.tests).each(function (j,test) {
+        test.status=null;
+      });
+    });
+    updateStatus();
     currentBackend=backends[$(this).val()];
   });
 
