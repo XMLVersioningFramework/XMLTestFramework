@@ -43,8 +43,10 @@ $( document ).ready(function() {
     console.log(a);
     var userstory=$(a.target).attr("userstory");
     var test=$(a.target).attr("test");
+    console.log(userstory);
     var aStory=getUserStory(userstory);
     console.log(aStory);
+    console.log(test);
     var aTest = getTest(aStory,test);
     reportIn(userstory,test,"pending");
     $.getScript("assets/userStories/"+aTest.runFile, function(a,b,c){
@@ -118,8 +120,7 @@ function reportIn(userStoryUuid,testName,status){
     alert("unknown status : "+status);
   }
   userStory.updateStatus();
- // alert(nrSuccess+" / "+nrPending+" / "+nrFail+" / "+nrNotRunned);
- updateStatus();
+  updateStatus();
 }
 
 function updateStatus() {
@@ -160,24 +161,7 @@ function addDataPoinOnServer(testName, value) {
    }
  });
 }
-/*
-function loadUserStories(story) {
-  $.ajax({
-   dataType : "json",
-   url : "/getUserStory/" + story,
-   success : success,
-   error : error
- });
-  function success(data) {
-   console.log(data);
 
- }
- function error(data) {
-   alert("error");
-   console.log(data);
- }
-}
-*/
 function compare(expected, actual) {
   return new Promise(function(resolve, reject) {
    var data = {

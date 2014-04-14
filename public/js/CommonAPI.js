@@ -24,14 +24,10 @@ CommonAPI=function (){
         data: data,
         async: async
       });
-
-
       ajaxRequest.done(function (response, textStatus, jqXHR){
          resolve(response);
       });
-      
       ajaxRequest.fail(function (response, textStatus, jqXHR){
-        
         console.log("error");
         console.log(response);
         reject(response);
@@ -40,6 +36,44 @@ CommonAPI=function (){
     });
   }
 
+  self.commitFile = function(url,commitFileUrl,message,async){
+    return new Promise(function(resolve, reject) {
+      var data={url:url,commitFileUrl:commitFileUrl,message:message,user:userId,backend:currentBackend};
+      var ajaxRequest=$.ajax({
+        type: "POST",
+        url: "http://"+server+":"+port+"/commit",
+        data: data,
+        async: async
+      });
+      ajaxRequest.done(function (response, textStatus, jqXHR){
+         resolve(response);
+      });
+      ajaxRequest.fail(function (response, textStatus, jqXHR){
+        console.log("error");
+        console.log(response);
+        reject(response);
+      });
+
+    });
+  }
+
+
+  self.getLog=function(){
+    return new Promise(function(resolve, reject) {
+      var data={user:0,backend:currentBackend};
+      var ajaxRequest=$.ajax({
+        type: "POST",
+        url: "http://"+server+":"+port+"/getLog",
+        data: data
+      });
+      ajaxRequest.done(function (response, textStatus, jqXHR){
+        resolve(response);
+      });
+      ajaxRequest.fail(function (response, textStatus, jqXHR){
+        reject(response);
+      });
+    }); 
+  }
 
   self.getHEAD=function(){
     return new Promise(function(resolve, reject) {

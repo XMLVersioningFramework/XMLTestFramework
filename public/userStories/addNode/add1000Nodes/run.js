@@ -33,6 +33,7 @@
     }
   ).then(
       function(fromServer) {
+        return commonAPI.getLog();
         reportIn(userStoryUuid,testName,"success");
       },function(data) {
         reportIn(userStoryUuid,testName,"error");
