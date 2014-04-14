@@ -45,10 +45,9 @@ $( document ).ready(function() {
     var test=$(a.target).attr("test");
     console.log(userstory);
     var aStory=getUserStory(userstory);
-    console.log(aStory);
-    console.log(test);
     var aTest = getTest(aStory,test);
     reportIn(userstory,test,"pending");
+    console.log("shood run test:");
     $.getScript("assets/userStories/"+aTest.runFile, function(a,b,c){
         
     })

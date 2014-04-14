@@ -74,6 +74,25 @@ CommonAPI=function (){
       });
     }); 
   }
+  self.getrevision=function(revisionID){
+    return new Promise(function(resolve, reject) {
+      var data={user:0,backend:currentBackend,revisionID:revisionID};
+      var ajaxRequest=$.ajax({
+        type: "POST",
+        url: "http://"+server+":"+port+"/getRevision",
+        data: data
+      });
+      ajaxRequest.done(function (response, textStatus, jqXHR){
+        resolve(response);
+      });
+      ajaxRequest.fail(function (response, textStatus, jqXHR){
+        reject(response);
+      });
+    }); 
+  }
+
+
+
 
   self.getHEAD=function(){
     return new Promise(function(resolve, reject) {
