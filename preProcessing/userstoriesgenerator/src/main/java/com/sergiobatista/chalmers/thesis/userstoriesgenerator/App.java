@@ -116,7 +116,7 @@ public class App {
 	 * @return
 	 */
 	private static String createEntryPath(String saveOutput, String[] row) {
-		String entry = WordUtils.capitalizeFully(row[1].trim()).replaceAll(" ",
+		String entry = WordUtils.capitalizeFully(row[2].trim()).replaceAll(" ",
 				"");
 		System.out.println("Entry:" + entry);
 

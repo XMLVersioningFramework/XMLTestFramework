@@ -6,7 +6,7 @@
 
   var commonAPI = new CommonAPI();
 
-  var file = $("<div>");
+  var file = $("<a>");
   $("<div>").html("hej").appendTo(file);
 
   commonAPI.initRepo().then(

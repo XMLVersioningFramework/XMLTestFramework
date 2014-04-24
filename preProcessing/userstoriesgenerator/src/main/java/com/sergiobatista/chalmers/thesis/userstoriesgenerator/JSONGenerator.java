@@ -9,22 +9,23 @@ public class JSONGenerator {
 	private JSONObject json = new JSONObject();
 
 	/**
-	 * input: [0] Timestamp, [1] Title, [2] Use Case, [3] Preconditions, [4]
-	 * Actors, [5] Scenario, [6] Alternative Scenario, [7] Desired Outcome, [8]
-	 * tags, [9] What, [10] Where, [11] How
+	 * input: [0] Timestamp,[1]ID, [2] User Story Title, [3] Use Case, [4]
+	 * Preconditions, [5] Actors, [6] Scenario, [7] Alternative Scenario, [8]
+	 * Desired Outcome, [9] tags,
+	 * [10]What, [11] Where, [12] How
 	 */
 	public JSONGenerator(String[] input) {
 		String uuid = WordUtils.capitalizeFully(input[1].trim()).replaceAll(
 				" ", "");
 		json.put("uuid", uuid);
 
-		this.setTitle(input[1]);
-		this.setUseCase(input[2]);
-		this.setPreConditions(input[3]);
-		this.setActors(input[4]);
-		this.setScenario(input[5]);
-		this.setAltScenario(input[6]);
-		this.setOutcome(input[7]);
+		this.setTitle(input[2]);
+		this.setUseCase(input[3]);
+		this.setPreConditions(input[4]);
+		this.setActors(input[5]);
+		this.setScenario(input[6]);
+		this.setAltScenario(input[7]);
+		this.setOutcome(input[8]);
 
 		/**
 		 * uncomment for the old version
@@ -32,9 +33,10 @@ public class JSONGenerator {
 		// this.setTags(input[8]);
 
 		JSONObject tags = new JSONObject();
-		this.setWhere(input[10], tags);
-		this.setHow(input[11], tags);
-		this.setWhat(input[9], tags);
+		this.setWhat(input[10], tags);
+		this.setWhere(input[11], tags);
+		this.setHow(input[12], tags);
+		
 		json.put("tags", tags);
 
 	}

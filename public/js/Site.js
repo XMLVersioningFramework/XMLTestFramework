@@ -1,6 +1,6 @@
 var userStories=[];
-var backends=["git","XChronicler"];
-var currentBackend="git";
+var backends=["sirix","git","XChronicler"];
+var currentBackend=backends[0];
 var nrSuccess=0;
 var nrPending=0;
 var nrFail=0;

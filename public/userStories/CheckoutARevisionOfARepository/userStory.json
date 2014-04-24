@@ -1,1 +1,1 @@
-{"tags":{"what":["Checkout"],"how":["Common ancestor"],"where":["Repository"]},"title":"checkout a revision of a repository","scenario":[],"useCase":"","actors":["Alice"],"uuid":"CheckoutARevisionOfARepository","outcome":"","alternativeScenario":[],"preConditions":[]}
+{"alternativeScenario":[],"actors":["Alice"],"useCase":"","preConditions":[],"scenario":[],"title":"checkout a revision of a repository","uuid":"6","outcome":"","tags":{"how":["Common ancestor"],"what":["Checkout"],"where":["Repository"]}}

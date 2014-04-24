@@ -9,22 +9,22 @@ public class HTMLGenerator {
 	}
 
 	/**
-	 * input: [0] Timestamp, [1] User Story Title, [2] Use Case, [3]
-	 * Preconditions, [4] Actors, [5] Scenario, [6] Alternative Scenario, [7]
-	 * Desired Outcome, [8] tags
+	 * input: [0] Timestamp,[1]ID, [2] User Story Title, [3] Use Case, [4]
+	 * Preconditions, [5] Actors, [6] Scenario, [7] Alternative Scenario, [8]
+	 * Desired Outcome, [9] tags
 	 */
 	public HTMLGenerator(String[] input) {
 
 		html += getOpeningTag();
 
-		html += getUserStoryTitle(input[1]);
-		html += getUseCase(input[2]);
-		html += getPreConditions(input[3]);
-		html += getActors(input[4]);
-		html += getScenario(input[5]);
-		html += getAltScenario(input[6]);
-		html += getOutcome(input[7]);
-		html += getTags(input[8]);
+		html += getUserStoryTitle(input[2]);
+		html += getUseCase(input[3]);
+		html += getPreConditions(input[4]);
+		html += getActors(input[5]);
+		html += getScenario(input[6]);
+		html += getAltScenario(input[7]);
+		html += getOutcome(input[8]);
+		html += getTags(input[9]);
 
 		html += getClosingTag();
 	}
