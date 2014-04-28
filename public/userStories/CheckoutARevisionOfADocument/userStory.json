@@ -1,1 +1,1 @@
-{"alternativeScenario":[],"actors":["Alice"],"useCase":"","preConditions":[],"scenario":[],"title":"checkout a revision of a document","uuid":"7","outcome":"","tags":{"how":["Common ancestor"],"what":["Checkout"],"where":["File"]}}
+{"alternativeScenario":[],"actors":["Alice"],"useCase":"","preConditions":[],"scenario":[],"title":"checkout a revision of a document","uuid":"CheckoutARevisionOfADocument","outcome":"","tags":{"how":["Common ancestor"],"what":["Checkout"],"where":["File"]}}
