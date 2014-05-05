@@ -15,7 +15,7 @@ public class JSONGenerator {
 	 * [10]What, [11] Where, [12] How
 	 */
 	public JSONGenerator(String[] input) {
-		String uuid = WordUtils.capitalizeFully(input[1].trim()).replaceAll(
+		String uuid = WordUtils.capitalizeFully(input[2].trim()).replaceAll(
 				" ", "");
 		json.put("uuid", uuid);
 

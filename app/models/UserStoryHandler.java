@@ -31,6 +31,7 @@ public class UserStoryHandler {
 		for (final File fileEntry : folder.listFiles()) {
 
 			if (fileEntry.isDirectory()) {
+				System.out.println("undersöker mapp:"+fileEntry.getName());
 				for (final File fileEntry2 : fileEntry.listFiles()) {
 					// System.out.println("fileEntry2 is file compare: "+fileEntry2.getName());
 					if (fileEntry2.getName().equals("userStory.json")) {
@@ -41,6 +42,8 @@ public class UserStoryHandler {
 						ObjectMapper mapper = new ObjectMapper();
 						ObjectNode userStory = (ObjectNode) Json
 								.parse(getTotalFile(fileEntry2));
+						System.out.println("userstory:" +Json.toJson(userStory) );
+						System.out.println("uuid:"+userStory.get("uuid").asText());
 						// mapper.writeValue(arg0, userStory);
 						// System.out.println("||||||||||||"+userStory.get("uuid").asText()+"|<|");
 						getTests(userStory.putArray("tests"),
@@ -57,6 +60,7 @@ public class UserStoryHandler {
 	}
 
 	public static void getTests(ArrayNode arrayNode, String userStoryUUID) {
+		System.out.println("UUID :"+userStoryUUID);
 		// String Userstory=getTotalFile(new
 		// File(baseUrl+arrayNode+"/userStory.html"));
 
