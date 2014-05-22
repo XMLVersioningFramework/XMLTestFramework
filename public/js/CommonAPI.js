@@ -32,9 +32,9 @@ CommonAPI=function (){
     });
   };
 
-  self.commitFile = function(url,commitFileUrl,message,async){
+  self.commitFile = function(url,commitFileUrl,message,relativeVersion){
     return new Promise(function(resolve, reject) {
-      var data={url:url,commitFileUrl:commitFileUrl,message:message,user:userId,backend:currentBackend};
+      var data={url:url,commitFileUrl:commitFileUrl,message:message,user:userId,backend:currentBackend,relativeVersion:relativeVersion};
       var ajaxRequest=$.ajax({
         type: "POST",
         url: "http://"+server+":"+port+"/commit",
