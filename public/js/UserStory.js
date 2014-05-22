@@ -1,7 +1,6 @@
 userStory = function(id, obj) {
   var self = this;
   self.id = id;
-  console.log(obj);
   self.title = obj.title;
   self.uuid = obj.uuid;
   self.useCase = obj.useCase;
@@ -17,13 +16,15 @@ userStory = function(id, obj) {
 
   self.getTitle = function() {
     return self.title;
-  }
+  };
+
   self.getUuid = function() {
     return self.uuid;
-  }
+  };
+
   self.getHTML = function() {
 
-    var panel = $("<div>").addClass("panel panel-default")
+    var panel = $("<div>").addClass("panel panel-default");
     var panelHeading = $("<div>").addClass("panel-heading").appendTo(panel);
     var panelTitle = $("<h4>").addClass("panel-title").appendTo(panelHeading);
     var collapseTopic = $("<a>").attr("data-toggle", "collapse").attr(
@@ -37,7 +38,7 @@ userStory = function(id, obj) {
     var row = $("<div>").addClass("row").appendTo(collapseBody);
     // var
     // left=$("<div>").addClass("col-md-6").attr("id","rigth").html("adhjsad").appendTo("row");
-    var left = $("<div>").addClass("col-md-6").attr("id", "rigth").append(
+    var right = $("<div>").addClass("col-md-6").attr("id", "rigth").append(
         self.getRigthColumn()).appendTo(row);
     var left = $("<div>").addClass("col-md-6").attr("id", "left").append(
         self.getTagsHtml()).appendTo(row);
@@ -46,7 +47,8 @@ userStory = function(id, obj) {
         .appendTo(row2);
     self.refHtml=panel;
     return panel;
-  }
+  };
+
   self.getTagsHtml = function() {
     var wraper = $('<div />').html("Tags");
     var headUl = $('<ul/>').appendTo(wraper);
@@ -70,27 +72,27 @@ userStory = function(id, obj) {
       var li = $('<li/>').text(data).appendTo(whatUl);
     });
     return wraper;
-  }
+  };
+
   self.getTestHTML = function() {
     if (self.tests.length > 0) {
       var wraper = $('<div />').html("Tests<br />");
       $.each(self.tests, function(i, data) {
-        console.log(data);
-        var button = $("<button id='" + i + "'/>").html(data.name)
+        var button = $("<button id='" + i + "'/>").html(data.name);
         button.appendTo(wraper);
         this.refHtml=button;
         button.click(function(argument) {
           reportIn(self.uuid,self.tests[$(this).attr("id")].name,"pending");
-          $.getScript("assets/userStories/"+self.tests[$(this).attr("id")].runFile, function(){
+            $.getScript("assets/userStories/"+self.tests[$(this).attr("id")].runFile, function(){
           });
-
         });
       });
       return wraper;
     } else {
       return "";
     }
-  }
+  };
+
   self.getRigthColumn = function() {
     var returnMsg = '<div class="use-case">\
                      <h5>Use Case</h5><p>'
@@ -160,15 +162,16 @@ userStory = function(id, obj) {
                   + self.outcome + '</p>\
 </div>';
     return returnMsg;
-  }
+  };
 
   self.getTags = function() {
     return self.tags;
-  }
+  };
+
   self.updateStatus=function() {
     var worst="notRun";
     console.log(self.refHtml);
-    
+
 
     for (var i = self.tests.length - 1; i >= 0; i--) {
       console.log("test i: "+i);
@@ -191,16 +194,9 @@ userStory = function(id, obj) {
         self.refHtml.find(".panel-heading").css({'background-image': '-webkit-linear-gradient(top,rgb(12, 194, 85) 0,rgb(114, 248, 25) 100%)'});
       }else if(worst=="pending"){
         self.refHtml.find(".panel-heading").css({'background-image': '-webkit-linear-gradient(top,rgb(64, 166, 247) 0px,rgb(25, 239, 248) 100%)'});
-   
       }else if(worst=="fail"){
         self.refHtml.find(".panel-heading").css({'background-image': '-webkit-linear-gradient(top, rgb(179, 2, 2) 0px, rgb(248, 44, 44) 100%)'});
       }
-
-
-
-
-    };
-  }
-
-
-}
+    }
+  };
+};

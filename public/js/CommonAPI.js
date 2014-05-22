@@ -1,19 +1,15 @@
-
-
 CommonAPI=function (){
   self=this;
   var server="localhost";
   var port="9001";
   var userId="0";
 
-
   self.connect=function(server, port){
 
-  }
+  };
   self.setUser=function(tUserId) {
     userId=tUserId;
-  }
-
+  };
 
   self.commit = function(url,content,message,async){
     return new Promise(function(resolve, reject) {
@@ -25,7 +21,7 @@ CommonAPI=function (){
         async: async
       });
       ajaxRequest.done(function (response, textStatus, jqXHR){
-         resolve(response);
+        resolve(response);
       });
       ajaxRequest.fail(function (response, textStatus, jqXHR){
         console.log("error");
@@ -34,7 +30,7 @@ CommonAPI=function (){
       });
 
     });
-  }
+  };
 
   self.commitFile = function(url,commitFileUrl,message,async){
     return new Promise(function(resolve, reject) {
@@ -46,7 +42,7 @@ CommonAPI=function (){
         async: async
       });
       ajaxRequest.done(function (response, textStatus, jqXHR){
-         resolve(response);
+        resolve(response);
       });
       ajaxRequest.fail(function (response, textStatus, jqXHR){
         console.log("error");
@@ -55,8 +51,7 @@ CommonAPI=function (){
       });
 
     });
-  }
-
+  };
 
   self.getLog=function(){
     return new Promise(function(resolve, reject) {
@@ -72,8 +67,9 @@ CommonAPI=function (){
       ajaxRequest.fail(function (response, textStatus, jqXHR){
         reject(response);
       });
-    }); 
-  }
+    });
+  };
+
   self.getrevision=function(revisionID){
     return new Promise(function(resolve, reject) {
       var data={user:0,backend:currentBackend,revisionID:revisionID};
@@ -88,11 +84,8 @@ CommonAPI=function (){
       ajaxRequest.fail(function (response, textStatus, jqXHR){
         reject(response);
       });
-    }); 
-  }
-
-
-
+    });
+  };
 
   self.getHEAD=function(){
     return new Promise(function(resolve, reject) {
@@ -108,8 +101,8 @@ CommonAPI=function (){
       ajaxRequest.fail(function (response, textStatus, jqXHR){
         reject(response);
       });
-    }); 
-  }
+    });
+  };
 
   self.initRepo =function(){
     return new Promise(function(resolve, reject) {
@@ -125,8 +118,7 @@ CommonAPI=function (){
       ajaxRequest.fail(function (response, textStatus, jqXHR){
         reject(response);
       });
-    }); 
-  }
+    });
+  };
 
-}
-
+};
