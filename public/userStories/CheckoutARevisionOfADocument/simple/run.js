@@ -1,12 +1,13 @@
 (function(){
-  console.log("run simple test");
   var userStoryUuid="CheckoutARevisionOfADocument";
   var testName="simple";
+
+  console.log("Running " + userStoryUuid + ":" + testName);
+
   //getInputFiles(userStoryUuid,testName);
-  
+
   var commonAPI = new CommonAPI();
-  console.log(userStoryUuid);
-  console.log(testName);
+
   var userStory=getUserStory(userStoryUuid);
   console.log(userStory);
   var test=getTest(userStory,testName);
@@ -34,7 +35,7 @@
       console.log(inputFolder+test.input[2]);
       return commonAPI.commitFile("a.txt", inputFolder+test.input[2], "texts");
     },function(data) {
-      alert("get head dont work");
+      alert("commit didnt work");
       reportIn(userStoryUuid,testName,"fail");
     }
   ).then(
@@ -44,17 +45,17 @@
       return commonAPI.getLog();
 
     },function(data) {
-      alert("compare dont work");
+      alert("commit didnt work");
       reportIn(userStoryUuid,testName,"fail");
     }
   ).then(
     function(fromServer) {
       console.log(fromServer);
       reportIn(userStoryUuid,testName,"success");
-      return commonAPI.getrevision(fromServer.logs[1].id);
+      return commonAPI.getRevision(fromServer.logs[1].id);
 
     },function(data) {
-      alert("compare dont work");
+      alert("get log work");
       reportIn(userStoryUuid,testName,"fail");
     }
   );

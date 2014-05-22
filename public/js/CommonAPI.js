@@ -70,7 +70,7 @@ CommonAPI=function (){
     });
   };
 
-  self.getrevision=function(revisionID){
+  self.getRevision=function(revisionID){
     return new Promise(function(resolve, reject) {
       var data={user:0,backend:currentBackend,revisionID:revisionID};
       var ajaxRequest=$.ajax({
