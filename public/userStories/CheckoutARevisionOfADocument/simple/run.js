@@ -3,7 +3,7 @@
 	var userStoryUuid="CheckoutARevisionOfADocument";
 	var testName="simple";
 	//getInputFiles(userStoryUuid,testName);
-	
+
 	var commonAPI = new CommonAPI();
 	console.log(userStoryUuid);
 	console.log(testName);
@@ -40,8 +40,8 @@
 	).then(
 	    function(fromServer) {
 	    	console.log(fromServer);
+        reportIn(userStoryUuid,testName,"success");
 	    	return commonAPI.getLog();
-	    	reportIn(userStoryUuid,testName,"success");
 
 	    },function(data) {
 	    	alert("compare dont work");
@@ -50,15 +50,12 @@
 	).then(
 	    function(fromServer) {
 	    	console.log(fromServer);
+        reportIn(userStoryUuid,testName,"success");
 	    	return commonAPI.getrevision(fromServer.logs[1].id);
-	    	reportIn(userStoryUuid,testName,"success");
 
 	    },function(data) {
 	    	alert("compare dont work");
 	    	reportIn(userStoryUuid,testName,"fail");
 	    }
-	)
-})()
-
-
-
+	);
+})();
