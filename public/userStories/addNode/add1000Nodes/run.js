@@ -33,11 +33,11 @@
     }
   ).then(
       function(fromServer) {
-        return commonAPI.getLog();
         reportIn(userStoryUuid,testName,"success");
+        return commonAPI.getLog();
       },function(data) {
         reportIn(userStoryUuid,testName,"error");
         alert("compare dont work");
       }
-  )
+  );
 })();
