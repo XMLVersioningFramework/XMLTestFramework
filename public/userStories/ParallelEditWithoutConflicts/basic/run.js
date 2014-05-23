@@ -33,7 +33,7 @@
   commonAPI.initRepo().then(
     function(data){
       // "File exists" and "File Content exists"
-      return commonAPI.commitFile(initialFile, inputFolder+initialFile, initialFileMessage, 0);
+      return commonAPI.commitFile("nanme", inputFolder+initialFile, initialFileMessage, 0);
     },
     function(data){
       console.log("Failed to initRepo");
@@ -45,7 +45,7 @@
     // "Bob checkouts repository" and "Bob edits same file in different place" -> bobsFile
     function(data) {
       // "Alice commits changes"
-      return commonAPI.commitFile(alicesFile, inputFolder+alicesFile, alicesFileMessage, 0);
+      return commonAPI.commitFile("alicesFile", inputFolder+alicesFile, alicesFileMessage, 0);
     },
     function(data){
       console.log("Failed to commit initialFile");
@@ -54,7 +54,7 @@
   ).then(
     function(data){
       // "Bob commits changes"
-      return commonAPI.commitFile(bobsFile, inputFolder+bobsFile, bobsFileMessage, 1);
+      return commonAPI.commitFile("bobsFile", inputFolder+bobsFile, bobsFileMessage, 1);
     },
     function(data){
       console.log("Failed to commit alicesFile");

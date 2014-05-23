@@ -17,8 +17,7 @@ CommonAPI=function (){
       var ajaxRequest=$.ajax({
         type: "POST",
         url: "http://"+server+":"+port+"/commit",
-        data: data,
-        async: async
+        data: data
       });
       ajaxRequest.done(function (response, textStatus, jqXHR){
         resolve(response);
@@ -38,8 +37,7 @@ CommonAPI=function (){
       var ajaxRequest=$.ajax({
         type: "POST",
         url: "http://"+server+":"+port+"/commit",
-        data: data,
-        async: async
+        data: data
       });
       ajaxRequest.done(function (response, textStatus, jqXHR){
         resolve(response);
